@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title>luyutil JsUnit Test</title>
+        <script type="text/javascript" src="../../external/jsunit/app/jsUnitCore.js"></script>
+        <script type="text/javascript" src="../luyutil.js"></script>
+        
+        <script language="javascript">
+           var _str="   trim str   ";
+            function testStringTrim() {
+                assertEquals(_str.trim(), 'trim str');
+            }	
+                
+            function testStringLtrim() {
+                assertEquals(_str.ltrim(), 'trim str   ');
+            }	
+                
+            function testStringRtrim() {
+                assertEquals(_str.rtrim(), '   trim str');
+            }
+            
+            function testStringFormat1() {
+                var f = '_{0}_{1}_';
+                var res = f.format('string', 'format');
+                //info(res);
+                assertEquals(res, '_string_format_');
+            }
+            
+            function testStringFormat2() {
+                var f = '_{0}_{1}_{0}_';
+                var res = f.format('string', 'format');
+                //info(res);
+                assertEquals(res, '_string_format_string_');
+            }
+            
+            function testStringFormatEx() {
+                var f = '_{0}_{2}_{0}_';
+                var res = f.format('string', 'format');
+                //info(res);
+                assertEquals(res, '_string_{2}_string_');
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

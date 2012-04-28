@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title>luyutil JsUnit Test</title>
+        <script type="text/javascript" src="../external/jsunit/app/jsUnitCore.js"></script>
+        <script type="text/javascript" src="../luyutil.js"></script>
+        
+        <script language="javascript">
+            function testLuyutilExist1() {				
+                assertNotUndefined($L);
+                //info('$L is available');
+            }
+
+            function testLuyutilExist2() {						
+                assertNotUndefined($luyutil);
+            }
+
+            function testLuyutilExist3() {						
+                assertNotUndefined(luyutil);
+            }
+
+            function testLuyutilExist4() {				
+                assertEquals($L, $luyutil);
+                assertEquals($L, luyutil);
+                assertEquals($luyutil, luyutil);
+            }
+
+            function testLuyutilExist4() {				
+                assertEquals($L, $luyutil);
+                assertEquals($L, luyutil);
+                assertEquals($luyutil, luyutil);
+            }
+                
+            var _str="   trim str   ";
+            function testStringTrim() {
+                assertEquals(_str.trim(), 'trim str');
+            }	
+                
+            function testStringLtrim() {
+                assertEquals(_str.ltrim(), 'trim str   ');
+            }	
+                
+            function testStringRtrim() {
+                assertEquals(_str.rtrim(), '   trim str');
+            }
+            
+            function testStringFormat1() {
+                var f = '_{0}_{1}_';
+                var res = f.format('string', 'format');
+                //info(res);
+                assertEquals(res, '_string_format_');
+            }
+            
+            function testStringFormat2() {
+                var f = '_{0}_{1}_{0}_';
+                var res = f.format('string', 'format');
+                //info(res);
+                assertEquals(res, '_string_format_string_');
+            }
+            
+            function testStringFormatEx() {
+                var f = '_{0}_{2}_{0}_';
+                var res = f.format('string', 'format');
+                //info(res);
+                assertEquals(res, '_string_{2}_string_');
+            }
+                
+            function testError1() {                
+                assertEquals(new $L.Error().str(), 'Unknow Category: Error');
+            }	
+                
+            function testError2() {                
+                assertEquals(new $L.Error('error msg', 'category').str(), 'category: error msg');
+            }
+                
+            function testSize1() {                
+                assertEquals(new $L.Dim.Size().str(), '[0, 0]');
+            }
+                
+            function testSize2() {
+                assertEquals(new $L.Dim.Size(1, 2).str(), '[1, 2]');
+            }	
+                
+            function testRect1() {
+                assertEquals(new $L.Dim.Rect().str(), '{0, 0, 0, 0}');
+            }
+                
+            function testRect2() {
+                assertEquals(new $L.Dim.Rect(1, 2, 3, 4).str(), '{1, 2, 3, 4}');
+            }
+                
+            function testRectToSize() {
+                assertEquals(new $L.Dim.Rect(1, 2, 3, 4).toSize().str(), '[2, 2]');
+            }
+                
+            function testSizeToPoint() {
+                assertEquals(new $L.Dim.Size(1, 2).toPoint().str(), '(1, 2)');
+            }
+                
+            function testPoint1() {
+                assertEquals(new $L.Dim.Point().str(), '(0, 0)');
+            }
+                
+            function testPoint2() {
+                assertEquals(new $L.Dim.Point(1, 2).str(), '(1, 2)');
+            }
+                
+            function testPointToSize() {
+                assertEquals(new $L.Dim.Point(1, 2).toSize().str(), '[1, 2]');
+            }
+                
+            function testCookieGetSet() {
+                $L.Cookie.set('name', 'luy', 1);
+                                
+                assertEquals('luy', $L.Cookie.get('name'));
+            }
+                
+            function testCookieDel() {
+                $L.Cookie.set('name', 'luy', 1);
+                $L.Cookie.del('name');
+                info($L.Cookie.get('name'));
+                                
+                //assertEquals(null, $L.Cookie.get('name'));
+            }		
+                
+            function testStringBilderAppend() {
+                var sb = new $L.Util.StringBuilder();
+                sb.append('test ').append('string');
+                        
+                assertEquals(sb.str(), 'test string');
+            }
+                
+            function testHashtableAdd() {
+                var hash = new $L.Util.Hashtable();
+                hash.add('name', 'luy').add('age', 25);
+                
+                assertEquals(hash.str(), '{name: luy, age: 25}');
+            }
+                
+            function testHashtableAddExtend1() {
+                var hash = new $L.Util.Hashtable();
+                hash.add('name', 'luy').add('extend', function(){});
+                //info(hash.str());
+                assertEquals(hash.str(), '{name: luy, extend: function}');
+            }
+                
+            function testHashtableAddExtend2() {
+                var hash = new $L.Util.Hashtable();
+                hash.add('name', 'luy').add('extend', 'override');
+                //info(hash.str());
+                assertEquals(hash.str(), '{name: luy, extend: override}');
+            }	
+                        
+            function testEventAdd1() {
+                var _event="";
+                var btn=document.getElementById('btn1');
+                
+                $L.Event.add(btn, 'click', function(){_event += 'f1';});
+                btn.click();
+                //info(_event);
+                
+                assertEquals(_event, 'f1');
+            }	
+            
+            function testEventAdd2() {
+                var _event="";
+                var btn=document.getElementById('btn2');
+                
+                $L.Event.add(btn, 'click', function(){_event += 'f1';});
+                $L.Event.add(btn, 'click', function(){_event += 'f2';});                
+                btn.click();
+                
+                assertEquals(_event, 'f1f2');
+            }	
+            
+            function testEventRemove1() {
+                var _event='';
+                var btn=document.getElementById('btn3');
+                var f1=function(e){
+                    _event+='f1';
+                };
+                
+                $L.Event.add(btn, 'click', f1);
+                $L.Event.remove(btn, 'click', f1);                
+                btn.click();
+                
+                assertEquals(_event, '');
+            }
+            
+            function testEventRemove2() {
+                var _event='';
+                var btn=document.getElementById('btn4');
+                var f1=function(e){
+                    _event+='f1';
+                };
+                
+                $L.Event.add(btn, 'click', f1);
+                $L.Event.add(btn, 'click', function(){_event += 'f2';});
+                $L.Event.remove(btn, 'click', f1);                
+                btn.click();
+                
+                assertEquals(_event, 'f2');
+            }
+            
+            function testEventRemoveAll() {
+                var _event='';
+                var btn=document.getElementById('btn5');
+                
+                $L.Event.add(btn, 'click', function(){_event += 'f1';});
+                $L.Event.add(btn, 'click', function(){_event += 'f2';});
+                $L.Event.remove(btn, 'click');
+                btn.click();
+                
+                assertEquals(_event, '');
+            }
+        </script>
+    </head>
+    <body>	
+        <input type="button" id="btn1" />
+        <input type="button" id="btn2" />
+        <input type="button" id="btn3" />
+        <input type="button" id="btn4" />
+        <input type="button" id="btn5" />
+    </body>
+</html>

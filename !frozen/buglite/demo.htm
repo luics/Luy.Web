@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>buglite Demo</title>
+	<link rel="stylesheet" href="css/demo.css" type="text/css" />
+	<link rel="stylesheet" href="css/buglite.css" type="text/css" /><!--
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>-->
+	<script type="text/javascript" src="external/jquery.min.js"></script>
+	<script type="text/javascript" src="js/buglite.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		//$.buglite.override(true);
+		for(var i=1;i<=80;++i)
+			$('body').append('<div style="border-bottom:1px solid #ddd;"> #'+ i +'</div>');
+	});
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

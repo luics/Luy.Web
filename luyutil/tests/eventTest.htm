@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title>luyutil JsUnit Test</title>
+        <script type="text/javascript" src="../../external/jsunit/app/jsUnitCore.js"></script>
+        <script type="text/javascript" src="../luyutil.js"></script>
+        
+        <script language="javascript">
+            function testEventAdd1() {
+                var _event="";
+                var btn=document.getElementById('btn1');
+                
+                $L.Event.add(btn, 'click', function(){_event += 'f1';});
+                btn.click();
+                //info(_event);
+                
+                assertEquals(_event, 'f1');
+            }	
+            
+            function testEventAdd2() {
+                var _event="";
+                var btn=document.getElementById('btn2');
+                
+                $L.Event.add(btn, 'click', function(){_event += 'f1';});
+                $L.Event.add(btn, 'click', function(){_event += 'f2';});                
+                btn.click();
+                
+                assertEquals(_event, 'f1f2');
+            }	
+            
+            function testEventRemove1() {
+                var _event='';
+                var btn=document.getElementById('btn3');
+                var f1=function(e){
+                    _event+='f1';
+                };
+                
+                $L.Event.add(btn, 'click', f1);
+                $L.Event.remove(btn, 'click', f1);                
+                btn.click();
+                
+                assertEquals(_event, '');
+            }
+            
+            function testEventRemove2() {
+                var _event='';
+                var btn=document.getElementById('btn4');
+                var f1=function(e){
+                    _event+='f1';
+                };
+                
+                $L.Event.add(btn, 'click', f1);
+                $L.Event.add(btn, 'click', function(){_event += 'f2';});
+                $L.Event.remove(btn, 'click', f1);                
+                btn.click();
+                
+                assertEquals(_event, 'f2');
+            }
+            
+            function testEventRemoveAll() {
+                var _event='';
+                var btn=document.getElementById('btn5');
+                
+                $L.Event.add(btn, 'click', function(){_event += 'f1';});
+                $L.Event.add(btn, 'click', function(){_event += 'f2';});
+                $L.Event.remove(btn, 'click');
+                btn.click();
+                
+                assertEquals(_event, '');
+            }
+        </script>
+    </head>
+    <body>	
+        <input type="button" id="btn1" />
+        <input type="button" id="btn2" />
+        <input type="button" id="btn3" />
+        <input type="button" id="btn4" />
+        <input type="button" id="btn5" />
+    </body>
+</html>

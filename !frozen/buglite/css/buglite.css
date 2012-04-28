@@ -1,0 +1,32 @@
+html,body{margin:0;padding:0;}
+.bugliteStatusbar{position:fixed;bottom:0;right:0;text-align:right;padding-right:0px;z-index:1000;}
+.bugliteStatusbar .statusPanel{background-color:#ddd;height:22px;line-height:22px;display:inline-block; padding:0 2px;}
+.bugliteWindow{position:fixed;bottom:0;left:0;height:200px;overflow:hidden; background:#fff;z-index:1000;}
+.bugliteWindow *, .bugliteStatusbar *{ font-size:12px; margin:0; padding:0;}
+.bugliteWindow  .off, .bugliteStatusbar .off{display:none;}
+.bugliteWindow  .topContainer a, .bugliteStatusbar a{text-decoration:none;color:#333;font-weight:bold;}
+.bugliteWindow  a img, .bugliteStatusbar a img{border-width:0;}
+
+.bugliteWindow a.command{display:inline-block;width:35px; height:20px;line-height:20px;text-align:center;text-decoration:none;color:#333;}
+.bugliteWindow a.command:hover, .bugliteWindow a.hover{text-decoration:underline;font-weight:bold;}
+
+.bugliteWindow  .topContainer{height:32px;line-height:32px;background:url(../img/top_bg.png) repeat-x;text-align:right;padding-right:0px;}
+.bugliteWindow  .topContainer .tabs{float:left;}
+
+/*
+* TAB Console
+*/
+.bugliteWindow  .logPanel{width:75%;float:left;}
+.bugliteWindow  .logPanel .commands{height:24px;line-height:24px; background-color:#e5e7ec;}
+.bugliteWindow  .logPanel .logContainer{height:144px;overflow:auto;}
+.logContainer .empty, .logContainer .code, .logContainer .coderes,
+.logContainer .log, .logContainer .debug, .logContainer .info, .logContainer .warn, .logContainer .error{
+	border-bottom:1px solid #d7d7d7;color: #333;line-height:20px;height:20px;}
+.logContainer .empty{font-style:italic;color: #ddd;}
+.logContainer .info{}
+.logContainer .warn{}
+.logContainer .error{color: #ff0000;}
+.bugliteWindow  .scriptPanel{width:25%;float:left;background:url(../img/mid_sep.gif) repeat-y;}
+.bugliteWindow  .scriptPanel .scriptContainer{margin-left:10px;width:100%;height:144px;border-width:0px;overflow:auto;}
+.bugliteWindow  .scriptPanel .commands{margin-left:0px;line-height:24px; height:24px; border-top:1px solid #9d9da1;background:#e0dfe3;}
+

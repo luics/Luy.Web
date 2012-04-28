@@ -1,0 +1,14 @@
+功能点：
+====================
+	Object Tab
+		Object显示
+			初级
+			复杂
+	复杂窗口控制：
+		position:fixed
+		高度变换/自适应
+		tab切换
+		面板隐藏（script）
+		弹出窗口（maximize）
+	样式改进
+		

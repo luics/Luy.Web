@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <title>Firefox3,IE6,IE7,IE8上传图片预览</title>
+        <style type="text/css">
+            .previewIE{
+                filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+                visibility:hidden;
+            }
+            .previewFF{
+                visibility:hidden;
+            }
+
+            .previewSizeIE{
+                position: absolute;
+                left:0;
+                top:0;
+                visibility:hidden;
+                filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+            }
+            .previewSizeFF{
+                position: absolute;
+                left:0;
+                visibility:hidden;
+                display:block;
+            }
+        </style>
+
+        <link type="text/css" rel="stylesheet" href="buglite/css/buglite.css" />
+        <script type="text/javascript" src="buglite/external/jquery.min.js"></script>
+        <script type="text/javascript" src="buglite/js/buglite.js"></script>
+        <script type="text/javascript">
+            
+            function onUploadImgChange(sender){
+                console.log('onUploadImgChange input file: ' + sender.value);
+                if( !sender.value.match( /.jpg|.gif|.png|.bmp/i ) ){
+                    alert('图片格式无效！');
+                    return false;
+                }
+
+                var objPreviewSizeIE = document.getElementById('__previewSizeIE');
+                var objpreviewSizeFF = document.getElementById('__previewSizeFF');
+                var objPreviewIE = document.getElementById('__previewIE');
+                var objPreviewFF = document.getElementById('__previewFF');
+
+                if(objPreviewSizeIE.filters){//ie
+                    objPreviewIE.style.visibility = 'visible';
+                    objPreviewFF.style.visibility = 'hidden';
+
+                    sender.select();
+                    var imgsrc = document.selection.createRange().text
+                    objPreviewSizeIE.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = imgsrc;
+                    console.log('onUploadImgChange absolute path: ' + imgsrc);
+                    objPreviewSizeIE.target = objPreviewIE;
+                    objPreviewSizeIE.imgsrc = imgsrc;
+
+                    onPreviewLoad(objPreviewSizeIE);
+                }else{//other: ff
+                    objPreviewFF.style.visibility = 'visible';
+                    objPreviewIE.style.visibility = 'hidden';
+                    objpreviewSizeFF.target = objPreviewFF;
+                    objpreviewSizeFF.imgsrc = sender.files[0].getAsDataURL();
+
+                    if(sender.files && sender.files[0]){// ff
+                        objpreviewSizeFF.src = sender.files[0].getAsDataURL();
+                    }
+                }
+            }
+
+            function onPreviewLoad(sender){
+                //Compute size
+                var w,h;
+                if(sender.offsetWidth){
+                    w=sender.offsetWidth;
+                    h=sender.offsetHeight;
+                }
+                else{
+                    w=sender.width;
+                    h=sender.height;
+                }
+                console.log('onPreviewLoad size: ' + w+'|'+h);
+
+                var islogo = false;
+                var defaultW = 320;
+                if(islogo){
+                    defaultW = 38;
+                }
+                var computedW = defaultW + 'px';
+                var computedH = defaultW/w*h +'px';
+                console.log('onPreviewLoad computed size: ' + computedW+ '|' +computedH );
+
+                //display
+                sender.target.style.width = computedW;
+                sender.target.style.height = computedH;
+                if(sender.target.filters){
+                    sender.target.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src= sender.imgsrc;
+                }else{
+                    sender.target.src =  sender.imgsrc;
+                }
+            }
+        </script>
+
+    </head>
+
+    <body>
+        <div id="__previewIE" class="previewIE" alt="" ></div>
+        <img id="__previewFF" class="previewFF" alt="" />
+        <br/>
+        <input id="__upload" type="file" onchange="onUploadImgChange(this)"/>
+        <br/>
+
+        <img id="__previewSizeIE" class="previewSizeIE" alt="" />
+        <img id="__previewSizeFF" class="previewSizeFF" onload="onPreviewLoad(this)" alt="" />
+    </body>
+</html>

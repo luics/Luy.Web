@@ -1,0 +1,23 @@
+body{ 
+	padding:0;  
+	margin:0;
+	font:12px tahoma;	
+}
+
+div{
+	border:1px solid #000000;
+}
+
+div.cube{
+	width:100px;
+	height:100px;
+}
+
+div.box{
+	width:200px;
+	height:20px;
+}
+
+.noBorder, .noBorder div{
+	border-style:none;
+} 

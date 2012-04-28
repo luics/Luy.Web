@@ -1,0 +1,11 @@
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/" xmlns:os="http://a9.com/-/spec/opensearch/1.1/">
+<os:ShortName>douban_movie</os:ShortName>
+<os:Description>douban movie search</os:Description>
+<os:InputEncoding>UTF-8</os:InputEncoding>
+<os:Image width="16" height="16">data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAAAABMLAAATCwAAEAAAAAAAAAAAZgAAEXARACJ6IgAzhTMAUJZQAGajZgB3rXcAiLiIAJnCmQCqzKoAu9a7AMzgzADd690A7vXuAP///wAAAAAAXu7MuIhlUyAIzO7u7u7u6wACM2qWi8y2AI7aIDeEIQAAioigACntQAAAAVUwAH6gAABt7uynRCAAAK287u7lAAAJ6AAkjeYAAC7tuGQk3kAAC+7u7u3uoAACu2i87u0wABIIpCEiIQAAvreKy2EAAACc3u7u7clgAAAUaIiLymAAAL3IAAC9+AAAAB8AAAAKAAAAAQAAAAEAAL3gAAAAAAAAACcAAAABAAAACgAAAAEAAM8bAAAAAAAA+mAAAAAM</os:Image>
+<UpdateUrl>http://mycroft.mozdev.org/updateos.php/id0/douban_movie.xml</UpdateUrl>
+<SearchForm>http://movie.douban.com/subject_search</SearchForm>
+<os:Url type="text/html" method="GET" template="http://movie.douban.com/subject_search?cat=1002&amp;search_text={searchTerms}">
+</os:Url><os:Url type="application/opensearchdescription+xml" method="GET" template="http://mycroft.mozdev.org/updateos.php/id0/douban_movie.xml" rel="self">
+</os:Url>
+</SearchPlugin>

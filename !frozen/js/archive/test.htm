@@ -1,0 +1,125 @@
+<html>
+<head>
+<script src="clone.js"></script>
+<script>
+function test(strTest){
+	re=/[a-zA-Z][a-zA-Z0-9_]{4,19}/;
+	return re.test(strTest);
+}
+
+function cutStr(){
+	//return 'abcdefg'.substr(4, 3);
+	//return 'abcdefg'.substring(4);
+	return 'abcdefg'.substring(4, 6);
+}
+
+window.onload=function (){
+	//alert(cutStr());
+	document.getElementById('txt').style.backgroundColor='red';
+	var roots=document.getElementsByTagName('body');
+	if(roots.length>0){
+		var root=roots[0];
+		//body.style.position="relative";
+		//body.style.position='ab';
+		var divE =document.createElement('div');
+		divE.id="floatDiv";
+		var s=divE.style;
+		s.width=document.body.clientWidth;
+		s.height=20;//document.body.clientHeight;//
+		s.position="absolute";
+		s.top=document.body.clientHeight-parseInt(s.height.substring(0,s.height.length-2));
+		s.left=0;
+		s.border="1px solid red";
+		root.insertBefore(divE, root.firstChild);
+	}
+	
+	window.onscroll=function(){
+		var div=document.getElementById('floatDiv');
+		//s.bottom="0";
+		//alert(div);
+		div.style.top=document.body.scrollTop
+		+document.body.clientHeight-parseInt(s.height.substring(0,s.height.length-2));
+	}
+	
+	var o={name:'luy', age:24, loc:{city:'SH', dict:'HP'}};
+	var cp=o.prototypeClone();	
+	cp.name='luy1';
+	o.name='king';
+	console.log(cp);
+	console.log(o);
+	
+	/*
+	var v=new String('a');
+	alert(typeof(v));
+	if(v instanceof String){
+		alert('ok');
+	}
+	var v=new Number(1);
+	if(v instanceof Number){
+		alert('v='+v+' is Number object');
+	}
+	v=1;
+	if(!(v instanceof Number)){
+		alert(v+ ' is literal number');
+	}	
+	
+	var v=new Boolean(true);
+	if(v instanceof Boolean){
+		alert('v='+v+' is Boolean object');
+	}
+	v=true;
+	if(!(v instanceof Boolean)){
+		alert(v+ ' is literal boolean');
+	}
+	
+	var v=null
+	alert(typeof(v)=='undefined');
+	alert(typeof(w)=='undefined');
+		
+	document.cookie='name='+encodeURIComponent('luy;;');
+	document.cookie='age=24';
+	setCookie('name','luy');
+	setCookie('age',24);
+	console.log(getCookie('name'));
+	console.log(getCookie('age'));
+	*/
+	
+}
+
+function Cookie(key, value){
+	this.key=key;
+	this.value=value;
+}
+
+function setCookie(key, value, expiredays, path, domain){
+	var value=value||'';
+	var expiredays=expiredays||1;
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate()+expiredays);
+	document.cookie=key+ "=" +encodeURIComponent(value)
+	+ ((expiredays==null) ? "" : ";expires="+exdate.toUTCString())
+	+ ((path==null) ? "" : ";path="+path)
+	+ ((domain==null) ? "" : ";domain="+domain);
+}
+
+function getCookie(key){
+	var start=document.cookie.indexOf(key+'=');
+	if(start!=-1){
+		start+=key.length+1;  
+		var end = document.cookie.indexOf(';', start);
+		if(end==-1)end=document.cookie.length;
+		return decodeURIComponent(document.cookie.substring(
+			start, end));
+	}
+	return null;
+}
+</script>
+<style>
+html, body{margin:0;padding:0;}
+</style>
+</head>
+<body>
+	<input id="txt" type="text" value="" />	
+	<p style="height:2000px;" />
+</body>
+</html>

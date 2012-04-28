@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title>luyutil JsUnit Test</title>
+        <script type="text/javascript" src="../../external/jsunit/app/jsUnitCore.js"></script>
+        <script type="text/javascript" src="../luyutil.js"></script>
+        
+        <script language="javascript">
+            function testLuyutilExist1() {				
+                assertNotUndefined($L);
+                //info('$L is available');
+            }
+
+            function testLuyutilExist2() {						
+                assertNotUndefined($luyutil);
+            }
+
+            function testLuyutilExist3() {						
+                assertNotUndefined(luyutil);
+            }
+
+            function testLuyutilExist4() {				
+                assertEquals($L, $luyutil);
+                assertEquals($L, luyutil);
+                assertEquals($luyutil, luyutil);
+            }
+
+            function testLuyutilExist4() {				
+                assertEquals($L, $luyutil);
+                assertEquals($L, luyutil);
+                assertEquals($luyutil, luyutil);
+            }
+            
+            function testError1() {                
+                assertEquals(new $L.Error().str(), 'Unknow Category: Error');
+            }	
+                
+            function testError2() {                
+                assertEquals(new $L.Error('error msg', 'category').str(), 'category: error msg');
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

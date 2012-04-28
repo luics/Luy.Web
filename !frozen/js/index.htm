@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title></title>
+        <script type="text/javascript" src="luyutil.js"></script>	
+        
+        <script type="text/javascript">
+            //console.log(new $L.Error());
+            window.onload=function(){
+                document.body.onclick=function(e){
+                    document.body.innerHTML+=$L.Dim.Util.getCursorPoint(e).str()+'<br/>';
+                };
+            };
+            
+            window.onresize=function(){                
+                document.body.innerHTML+=($L.Dim.Util.getViewportSize())+'<br/>';
+            };
+ 
+
+                var hash = new $L.Util.Hashtable();
+                hash.add('name', 'luy').add('age', 25);
+
+                alert(hash.str());
+        </script>	
+    </head>
+    <body style="height:800px; border:1px solid">
+        
+    </body>
+</html>

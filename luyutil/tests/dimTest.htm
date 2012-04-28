@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title>luyutil JsUnit Test</title>
+        <script type="text/javascript" src="../../external/jsunit/app/jsUnitCore.js"></script>
+        <script type="text/javascript" src="../luyutil.js"></script>
+        
+        <script language="javascript">
+            function testSize1() {                
+                assertEquals(new $L.Dim.Size().str(), '[0, 0]');
+            }
+                
+            function testSize2() {
+                assertEquals(new $L.Dim.Size(1, 2).str(), '[1, 2]');
+            }	
+                
+            function testRect1() {
+                assertEquals(new $L.Dim.Rect().str(), '{0, 0, 0, 0}');
+            }
+                
+            function testRect2() {
+                assertEquals(new $L.Dim.Rect(1, 2, 3, 4).str(), '{1, 2, 3, 4}');
+            }
+                
+            function testRectToSize() {
+                assertEquals(new $L.Dim.Rect(1, 2, 3, 4).toSize().str(), '[2, 2]');
+            }
+                
+            function testSizeToPoint() {
+                assertEquals(new $L.Dim.Size(1, 2).toPoint().str(), '(1, 2)');
+            }
+                
+            function testPoint1() {
+                assertEquals(new $L.Dim.Point().str(), '(0, 0)');
+            }
+                
+            function testPoint2() {
+                assertEquals(new $L.Dim.Point(1, 2).str(), '(1, 2)');
+            }
+                
+            function testPointToSize() {
+                assertEquals(new $L.Dim.Point(1, 2).toSize().str(), '[1, 2]');
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

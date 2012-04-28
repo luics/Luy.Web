@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>luyutil Test Suite</title>
+    <script type="text/javascript" src="../../external/jsunit/app/jsUnitCore.js"></script>
+    <script type="text/javascript">
+        // tests/luyutilTestSuite.htm
+        function path(file){    
+            //relative to testRunner.html
+            return '../../luyutil/tests/' + file;
+        }
+        
+        function coreSuite() {
+            var result = new JsUnitTestSuite();
+            result.addTestPage(path('cookieTest.htm'));
+            result.addTestPage(path('dimTest.htm'));
+            result.addTestPage(path('eventTest.htm'));
+            result.addTestPage(path('hashTableTest.htm'));
+            result.addTestPage(path('luyutilTest.htm'));
+            result.addTestPage(path('stringBuilderTest.htm'));
+            result.addTestPage(path('stringTest.htm'));
+            //result.addTestPage(path('Test.htm'));
+            return result;
+        }
+
+        function otherSuite() {
+            var result = new JsUnitTestSuite();
+            return result;
+        }
+
+        function suite() {
+            var newsuite = new JsUnitTestSuite();
+            newsuite.addTestSuite(coreSuite());
+            newsuite.addTestSuite(otherSuite());
+            return newsuite;
+        }
+    </script>
+</head>
+
+<body>
+</body>
+</html>

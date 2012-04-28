@@ -1,4 +1,24 @@
-Web Development toolkit
-By Luy
+Luy's Web Development toolkit
+It's based on GPL license.
 
-in github
+@author Luy(xukai)
+@mail luics.king@gmail.com
+@create 20120428
+
+=====================================
+!frozen
+    not to support
+!tools
+    external tools
+books 
+    sample code of books
+css
+    sample code of css
+ie
+    sample code of ie
+javascript
+    sample code of js
+luyutil
+    my personal js util function library
+utils
+    useful tools

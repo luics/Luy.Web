@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title>luyutil JsUnit Test</title>
+        <script type="text/javascript" src="../../external/jsunit/app/jsUnitCore.js"></script>
+        <script type="text/javascript" src="../luyutil.js"></script>
+        
+        <script language="javascript">
+            function testCookieGetSet() {
+                $L.Cookie.set('name', 'luy', 1);
+                                
+                assertEquals('luy', $L.Cookie.get('name'));
+            }
+                
+            function testCookieDel() {
+                $L.Cookie.set('name', 'luy', 1);
+                $L.Cookie.del('name'); 
+                info($L.Cookie.get('name'));
+                                
+                assertEquals(null, $L.Cookie.get('name'));
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

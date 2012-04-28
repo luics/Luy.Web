@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<title>Horizontal Center</title>
+	<link rel="stylesheet" type="text/css" href="global.css" />
+	<style type="text/css">	
+	div.tipBody{
+		margin:0 auto;
+		width:503px;
+		height:397px;
+		background:url("img/background.gif") no-repeat;
+	}
+	
+	div.tipTitle{
+		height:120px;
+		background:url("img/success.gif") no-repeat 25px center;
+	}
+	
+	div.tipDesc{
+		height:80px;
+		padding-top: 10px;
+		text-align:center;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="noBorder">
+		<div class="tipBody">
+			<div class="tipTitle" ></div>
+			<div class="tipDesc">
+				Horizontal Center！<br />
+				<input value=" 返 回 " onclick="alert('GO!')" type="button" />
+			</div>
+		</div>
+	</div>
+
+	<div style="height:100px; width:500px">Horizontal Center</div>  <!--这个层不居中 -->
+
+	<div style="height:100px; width:500px; margin:0 auto;">Horizontal Center</div>  <!--这个层居中 -->
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<script>
+
+
+function disItems(items){
+	for(var i=0; i<items.length; i++){
+		document.write(items[i]+' ');
+	}
+	document.write('<br/>');
+}
+
+function arrayCopy(sItems, sPos, dItems, dPos, len){
+	for(var i=0; i<len; i++){
+		dItems[i+dPos] = sItems[i+sPos];
+	}
+}
+
+function quickSort(items){
+	_quickSort(items, 0, items.length - 1);
+}
+
+function _quickSort(items, left, right){
+	if(left < right){
+		var p = partition(items, left, right);
+		_quickSort(items, left, p-1);
+		_quickSort(items, p+1, right);
+	}
+}
+
+function partition(items, left, right){
+	var pkey = items[left];
+	while(left < right){
+		while(left < right && items[right] >= pkey){
+			right--;
+		}
+		items[left] = items[right];
+		while(left < right && items[left] <= pkey){
+			left++;
+		}
+		items[right] = items[left];
+	}
+	items[left] = pkey;
+	return left;
+}
+
+function merge(sItems, dItems, s, m, e){
+	var i, j, k;
+	for(i=s, j=m+1, k=s; i<=m && j<=e; k++){
+		dItems[k]= (sItems[i]<sItems[j]?sItems[i++]:sItems[j++]);
+	}
+	if(i<=m){
+		arrayCopy(sItems, i, dItems, k, m-i+1);
+	}
+	else{
+		arrayCopy(sItems, j, dItems, k, e-j+1);	
+	}
+	
+	arrayCopy(dItems, s, sItems, s, e-s+1);	
+}
+
+
+function mergeSort(sItems){
+	var dItems = [];
+	
+}
+
+function main(){
+	//function sequence()
+	var items = [7, 4, 5, 6, 3, 2, 1];
+	disItems(items);
+	var n = items.length;
+	
+	//quickSort(items);
+	//merge(items, dItems, 0, 3, 6);
+	
+	mergeSort(items);
+	
+	//disItems(dItems);
+	disItems(items);
+}
+
+main();
+</script>

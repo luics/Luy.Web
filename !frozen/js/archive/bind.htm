@@ -1,0 +1,45 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+         <title>StripingTable</title>
+         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>		 
+         <script type="text/javascript">
+         <!--
+             $(document).ready(function(){
+                 //给id为p2的绑定事件
+                 $("#p2").bind("click",function(){
+                     alert($(this).text());
+                 });
+               
+                 //给id为p1的绑定事件,带参数，在内部绑定处理方法过程
+                 $("#p1").bind("click",{t:new Date()},function(event){
+                     alert($(this).text()+"   " + event.data.t);
+                 });
+               
+                 //给id为p3的绑定事件,带参数，在外部绑定处理方法交给了runClick函数
+                 $("#p3").bind("click",{t:new Date()},runClick);
+               
+                 //取消form的默认submit方法
+                 $("form").bind("submit",function(){return false});
+             });
+           
+             function runClick(event){
+                 alert($(this).text()+"   " + event.data.t);
+             }
+         -->
+         </script>
+     </head>
+     <body>
+         <div class="title_a">一、事件处理</div>
+         <div class="title_b">(一)、bind(type,data,fn)用法!</div>
+         <div>不带参数</div>
+         <p id="p2">点我试试</p>
+         <div>带参数的</div>
+         <p id="p1">a. 直接函数内绑定参数,点我再试试</p>
+         <p id="p3">b. 间接函数内绑定参数,点我再试试</p>
+         <div>利用绑定事件来取消掉submit的默认提交方式</div>
+         <form action="">
+             <input type="submit" value="现在已经提交不了了"/>
+         </form>
+     </bdoy>
+</html>
