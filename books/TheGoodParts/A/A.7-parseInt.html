@@ -1,0 +1,23 @@
+<!--
+@author Luy
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A.7 parseInt</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>A.7 parseInt</h1>
+    <script>
+      var numstr1 = '08', numstr2 = '09', numstr3 = '0x10';
+      //0开头为8进制字面量
+      console.log(parseInt(numstr1), parseInt(numstr2));
+      console.log(parseInt(numstr1, 10), parseInt(numstr2, 10));
+      
+      //0x开头为16进制字面量
+      console.log(parseInt(numstr3));
+      console.log(parseInt(numstr3, 16));
+    </script>
+  </body>
+</html>
