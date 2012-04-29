@@ -1,0 +1,26 @@
+<!--
+@author Luy
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2.5 statement</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>2.5 statement</h1>
+    <script>
+      Object.prototype.b = 1;
+      var obj = {a:1};
+      //console.log(Object.prototype['constructor']);
+      for(var k in obj){
+        console.log(k, obj[k]);
+      }
+      
+      for(var k in obj) if(obj.hasOwnProperty(k)){        
+        console.log('hasOwnProperty', k, obj[k]);
+      }
+    </script>
+  </body>
+</html>
+

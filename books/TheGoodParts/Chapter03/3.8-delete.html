@@ -1,0 +1,26 @@
+<!--
+@author Luy
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3.8 delete</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>3.8 delete</h1>
+    <script>
+      Object.prototype.b = 1;
+      var obj = {b:2};
+      console.log(obj.b);
+      
+      //无法删除prototype中的值
+      delete obj.b;
+      
+      //prototype中的值出现了
+      console.log(obj.b);
+
+    </script>
+  </body>
+</html>
+

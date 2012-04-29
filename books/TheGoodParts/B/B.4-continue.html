@@ -1,0 +1,37 @@
+<!--
+@author Luy
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>B.4 continue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>B.4 continue</h1>
+    <script>
+      var START = (+new Date),
+      N = 1000 * 1000,
+      A = 1000,
+      B = 2000,
+      c, i;
+      
+      for(i=0; i<N; ++i){
+        c = A * B;
+        if(i>0){
+          continue;
+        }
+      }
+      
+      console.log(+new Date - START);
+      START = (+new Date);
+      
+      for(i=0; i<N; ++i){
+        c = A * B;
+      }
+    
+      console.log(+new Date - START);
+    </script>
+  </body>
+</html>
+
