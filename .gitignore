@@ -1,2 +1,5 @@
 /books/NodeJsBeginner/node_modules/.bin/
 /.idea/
+/AppCache/nbproject/private/
+/html/AppCache/nbproject/private/
+/html/cache/nbproject/private/
