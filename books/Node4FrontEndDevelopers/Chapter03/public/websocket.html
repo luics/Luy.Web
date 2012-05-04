@@ -1,0 +1,20 @@
+<input type="text" id="txtFirstName" placeholder="First name" />
+<input type="text" id="txtLastName" placeholder="Last name" />   
+<input type="button" id="btnGetName" value="Save" />
+<script src="http://localhost:1337/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect("http://localhost:1337"),
+  fName = document.getElementById("txtFirstName"),
+  lName = document.getElementById("txtLastName"),
+  btn = document.getElementById("btnGetName");
+  // handle button click
+  btn.addEventListener("click", function() {
+    // publish setName event with data
+    socket.emit("setName", {firstName: fName.value, lastName: lName.value});
+    return false;
+  });
+  // listen for nameSet event
+  socket.on("nameSet", function(data) {
+    alert("Username set: " + data.userName);
+  });
+</script>
