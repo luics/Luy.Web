@@ -1,2 +1,4 @@
 /books/NodeJsBeginner/node_modules/.bin/
 /.idea/
+/books/Node4FrontEndDevelopers/Chapter04/node_modules/.bin/
+/books/Node4FrontEndDevelopers/Chapter03/node_modules/socket.io/node_modules/socket.io-client/node_modules/.bin/
