@@ -51,7 +51,7 @@ client.query(
             console.log(result);
         });
 
-        console.log('fields', fields);
+        //console.log('fields', fields);
         client.end();
     }
 );
