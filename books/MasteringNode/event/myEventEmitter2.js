@@ -1,7 +1,5 @@
 var Dog = require('./Dog').Dog;
 
-console.log(Dog);
-
 var simon = new Dog({name:'simon', age:3}),
     tj = new Dog({name:'tj', age:4});
 
