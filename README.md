@@ -8,14 +8,6 @@ from 2012-04-28
 
 ## Structure
 
-### !frozen
-
-not to support anymore
-
-### !tools
-
-external tools
-
 ### books 
 
 sample code of books
@@ -23,6 +15,10 @@ sample code of books
 ### css
 
 sample code of css
+
+### frozen
+
+not to support anymore
 
 ### html
 
@@ -43,6 +39,10 @@ my personal js util function library
 ### node   
 
 sample code of node
+
+### tools
+
+external tools
 
 ### utils
 
