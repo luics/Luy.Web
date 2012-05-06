@@ -1,10 +1,8 @@
 #Luy.Web
 
-## Luy's Web Development toolkit
+Luy's Web Development toolkit.
 
-Luy(xukai)
-luics.king@gmail.com
-from 2012-04-28
+by [**Luy**](luics.king@gmail.com), from 2012-04-28
 
 ## Structure
 
