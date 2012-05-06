@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Classical Inheritance</title>
+</head>
+<body>
+<h3>Classical Inheritance</h3>
+<script src="inheritance.js"></script>
+<script>
+function Parenizor(value) {
+    this.setValue(value);
+}
+
+Parenizor.method('setValue', function (value) {
+    this.value = value;
+    return this;
+});
+
+Parenizor.method('getValue', function () {
+    return this.value;
+});
+
+Parenizor.method('toString', function () {
+    return '(' + this.getValue() + ')';
+});
+
+myParenizor = new Parenizor(0);
+myString = myParenizor.toString();
+console.log(myString);
+
+/*****************************************************************/
+function ZParenizor(value) {
+    this.setValue(value);
+}
+
+ZParenizor.inherits(Parenizor);
+
+ZParenizor.method('toString', function () {
+    if (this.getValue()) {
+        return this.uber('toString');
+    }
+    return "-0-";
+});
+
+myZParenizor = new ZParenizor(0);
+myString = myZParenizor.toString();
+console.log(myString);
+</script>
+</body>
+</html>
