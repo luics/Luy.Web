@@ -1,39 +1,40 @@
 var mysql = require('mysql'),
-fs = require('fs'),
-util = require('util'),
-TB_USER = {
-  name:'user', 
-  users:200, 
-  posts:10
-},
-TB_POST = {
-  name:'post', 
-  comments:10
-},
-TB_COMMENT = {
-  name:'comment'
-},
-LOOP = 2, // Total: TB_USER.users * TB_USER.posts * TB_POST.comments * LOOP
-LABEL = 'DATA_INIT',
-TBS = [TB_USER, TB_POST, TB_COMMENT],
-SQL = __dirname + '/../mblog.sql'; //__dirname + '/../tools/mblog/0mblog.sql';
+  fs = require('fs'),
+  util = require('util'),
+  TB_USER = {
+    name:'user',
+    users:200,
+    posts:10
+  },
+  TB_POST = {
+    name:'post',
+    comments:10
+  },
+  TB_COMMENT = {
+    name:'comment'
+  },
+  LOOP = 1, // Total: TB_USER.users * TB_USER.posts * TB_POST.comments * LOOP
+  LABEL = 'DATA_INIT',
+  TBS = [TB_USER, TB_POST, TB_COMMENT],
+  SQL = __dirname + '/../mblog.sql'; //__dirname + '/../tools/mblog/0mblog.sql';
 
-exports.init = function(option){
+exports.init = function (option) {
   var user = option.user || 'root',
-  password = option.password || '123456',
-  database = option.database || 'mblog';
-  
+    password = option.password || '123456',
+    database = option.database || 'mblog';
+
   var client = mysql.createClient({
-    user: user,
-    password: password,
+    user:user,
+    password:password,
     database:database
   });
 
   /**
- * mysql module 目前有单次请求包局限为16MB，可考虑多次运行init
- */
+   * mysql module 目前有单次请求包局限为16MB，可考虑多次运行init
+   */
   var LAST_USER_ID = 1,
-  LAST_POST_ID = 1;
+    LAST_POST_ID = 1;
+
   function init(index, onready) {
     var tag = '[' + index + '] ';
 
@@ -47,55 +48,62 @@ exports.init = function(option){
     }
     client.query('INSERT INTO user(name, age, idnum, mail, intro, address) VALUES '
       + values.join(','), function (err, info) {
-        if (err) throw err;
-        console.log(tag + 'INSERT user +', info.affectedRows, info.insertId);
-        /******************************/
-        values = [];
-        for (i = 0; i < TB_USER.users; ++i) {
-          for (j = 0; j < TB_USER.posts; ++j) {
-            var uid = LAST_USER_ID + i;
-            values.push(client.format('(?,?,?,?)', [uid, 0, 'post @user' + uid + ' #' + j, 'Android']));
-          }
+      if (err) throw err;
+      console.log(tag + 'INSERT user +', info.affectedRows, info.insertId);
+      /******************************/
+      values = [];
+      for (i = 0; i < TB_USER.users; ++i) {
+        for (j = 0; j < TB_USER.posts; ++j) {
+          var uid = LAST_USER_ID + i;
+          values.push(client.format('(?,?,?,?)', [uid, 0, 'post @user' + uid + ' #' + j, 'Android']));
         }
-        client.query('INSERT INTO post(user,parent,msg,src) VALUES ' + values.join(',')
-          , function (err, info) {
-            if (err) throw err;
-            console.log(tag + 'INSERT post +', info.affectedRows, info.insertId);
+      }
+      client.query('INSERT INTO post(user,parent,msg,src) VALUES ' + values.join(',')
+        , function (err, info) {
+          if (err) throw err;
+          console.log(tag + 'INSERT post +', info.affectedRows, info.insertId);
 
-            /******************************/
-            values = [];
-            for (i = 0; i < TB_USER.users * TB_USER.posts; ++i) {
-              var uids = [];
-              while (uids.length < TB_POST.comments) {
-                var r = LAST_USER_ID + Math.floor(TB_USER.users * Math.random());
-                if (uids.indexOf(r) < 0) {
-                  uids.push(r);
-                }
-              }
-              for (j = 0; j < TB_POST.comments; ++j) {
-                var uid = uids[j],
-                pid = LAST_POST_ID + i;
-                values.push(client.format('(?,?,?)', [pid, uid, 'comment @user' + uid + ' #' + pid + ' *' + j]));
+          /******************************/
+          values = [];
+          for (i = 0; i < TB_USER.users * TB_USER.posts; ++i) {
+            var uids = [];
+            while (uids.length < TB_POST.comments) {
+              var r = LAST_USER_ID + Math.floor(TB_USER.users * Math.random());
+              if (uids.indexOf(r) < 0) {
+                uids.push(r);
               }
             }
-            client.query('INSERT INTO comment(post,user,msg) VALUES ' + values.join(',')
-              , function (err, info) {
-                if (err) throw err;
-                console.log(tag + 'INSERT comment +', info.affectedRows, info.insertId);
+            for (j = 0; j < TB_POST.comments; ++j) {
+              var uid = uids[j],
+                pid = LAST_POST_ID + i;
+              values.push(client.format('(?,?,?)', [pid, uid, 'comment @user' + uid + ' #' + pid + ' *' + j]));
+            }
+          }
+          client.query('INSERT INTO comment(post,user,msg) VALUES ' + values.join(',')
+            , function (err, info) {
+              if (err) throw err;
+              console.log(tag + 'INSERT comment +', info.affectedRows, info.insertId);
 
-                LAST_USER_ID += TB_USER.users;
-                LAST_POST_ID += TB_USER.users * TB_USER.posts;
-                if (onready) onready();
-              });
-          });
-      });
+              LAST_USER_ID += TB_USER.users;
+              LAST_POST_ID += TB_USER.users * TB_USER.posts;
+              if (onready) onready();
+            });
+        });
+    });
   }
 
+  /**
+   *
+   * @param sqls {mixed} single line, array, multiline seprated by colon
+   * @param onready {function}
+   */
   function query(sqls, onready) {
     sqls = Array.isArray(sqls) ? sqls : sqls.split(';');
     for (var i = 0; i < sqls.length; ++i) {
       var sql = sqls[i];
-      sql = sql.replace(/^\s+|\s+$/g, '').replace(/\n/g, '');
+      sql = sql.replace(/^\s+|\s+$/g, '');
+      ////.replace(/\n/g, '').replace(/\r/g, '')
+      //.replace(/--.*?$/g, '')
       //console.log('[sql]', sql);
       if (sql === '') {
         continue;
@@ -110,7 +118,7 @@ exports.init = function(option){
             console.log(sql, '|', info.affectedRows, info.insertId, info.message);
           } else if (arguments.length === 3) {
             var rows = arguments[1],
-            fields = arguments[2];
+              fields = arguments[2];
             console.log(sql, '|', rows.length, (rows.length > 0 ? rows[0] : ''));
           }
           if (index === sqls.length - 1 && onready) onready();
@@ -146,10 +154,10 @@ exports.init = function(option){
           query(['SET SQL_MODE=@OLD_SQL_MODE',
             'SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS',
             'SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS'], function () {
-              client.destroy();
-              console.log('client.destroy()');
-              console.timeEnd(LABEL);
-            });
+            client.destroy();
+            console.log('client.destroy()');
+            console.timeEnd(LABEL);
+          });
         } else {
           run();
         }
@@ -159,7 +167,7 @@ exports.init = function(option){
     run();
 
   });
-  
+
 }
 
 

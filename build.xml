@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<project name="testCondition"> 
+  <target name="test"> 
+    <condition property="scondition"> 
+      <istrue value="true"/>                    
+    </condition> 
+    <antcall target="isTrue"></antcall> 
+    <antcall target="isFalse"></antcall>        
+  </target> 
+  <target name="isTrue" if="scondition"> 
+    <echo>is ture</echo> 
+  </target> 
+  <target name="isFalse" unless="scondition"> 
+    <echo>is false</echo> 
+  </target> 
+</project> 
