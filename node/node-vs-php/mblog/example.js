@@ -1,4 +1,4 @@
-var mblog = require('./mblog');
+var mblog = require('./index');
 
 mblog.init({
   user: 'root',

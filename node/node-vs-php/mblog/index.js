@@ -1,1 +1,1 @@
-exports = require('./lib/mblog');
+module.exports = require('./lib/mblog');

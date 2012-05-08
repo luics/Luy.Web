@@ -1,40 +1,40 @@
 {
-  "name": "mblog",
-  "version": "0.1.0",
-  "author": {
-    "name": "luy",
-    "email": "luics.king@gmail.com",
-    "url": "http://github.com/luics"
+  "name":"mblog",
+  "version":"0.1.0",
+  "author":{
+    "name":"luy",
+    "email":"luics.king@gmail.com",
+    "url":"http://github.com/luics"
   },
-  "description": "micro blog data model",
-  "homepage": "http://github.com/luics/mblog",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/luics/mblog"
+  "description":"micro blog data model",
+  "homepage":"http://github.com/luics/mblog",
+  "repository":{
+    "type":"git",
+    "url":"git://github.com/luics/mblog"
   },
-  "main": "./index",
-  //  "scripts": {
-  //    "test": "make test"
-  //  },
-  "dependencies": {
-    "mysql": "0.9.5"
+  "main":"./index",
+  "scripts":{
+    "test":"make test"
   },
-  //  "devDependencies": {
-  //    "gently": "0.8.0",
-  //    "urun": "0.0.4",
-  //    "utest": "0.0.3"
-  //  },
-  "engines": {
-    "node": "*"
+  "dependencies":{
+    "mysql":"0.9.5"
   },
-  "_id": "mblog@0.1.0",
-  "optionalDependencies": {},
-  "_engineSupported": true,
-  "_npmVersion": "1.1.21",
-  "_nodeVersion": "v0.6.17",
-  "_defaultsLoaded": true,
-//  "dist": {
-//    "shasum": "e9625491d14b717dc9526258d11ea48152c9a560"
-//  },
-  "_from": "mblog"
+  "devDependencies":{
+    "gently":"0.8.0",
+    "urun":"0.0.4",
+    "utest":"0.0.3"
+  },
+  "engines":{
+    "node":"*"
+  },
+  "_id":"mblog@0.1.0",
+  "optionalDependencies":{},
+  "_engineSupported":true,
+  "_npmVersion":"1.1.21",
+  "_nodeVersion":"v0.6.17",
+  "_defaultsLoaded":true,
+  "dist":{
+    "shasum":""
+  },
+  "_from":"mblog"
 }
