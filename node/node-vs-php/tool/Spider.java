@@ -14,14 +14,15 @@ class Spider {
 	private static final String D = "-d";
 	private static final String H = "-?";
 	private static final String V = "-v";
+	private static final String C = "-c"; // Max
 	private static int connection = 100;
-	// private static int maxThread = 500;
+	private static int maxThread = 500;
 	// private static final int MIN_PER_THREAD = 10;
 	private static boolean verbose;
 	private static String node = "node";
 	private static String message;
 	private static final String VERSION = "0.1.0";
-	private static final String WELCOME = String.format("Spider Emulator, by Luy (luics.king@gmail.com)\n%s", VERSION);
+	private static final String WELCOME = String.format("Spider Emulator\nby Luy (luics.king@gmail.com)\n%s", VERSION);
 
 	private static String httpGet(String paramString) throws IOException {
 		URL url = new URL(paramString);
@@ -55,7 +56,7 @@ class Spider {
 		params.put(H, "Help information");
 		params.put(M, "Message");
 
-		HELP.append(String.format("\n%s\n\nUsage:\njava Spider http-conn-num [options]", WELCOME));
+		HELP.append(String.format("\n%s\n\nUsage:\njava Spider http-conn-num [options]\n\n", WELCOME));
 		Iterator<String> itor = params.keySet().iterator();
 		while (itor.hasNext()) {
 			String key = itor.next();
@@ -72,7 +73,6 @@ class Spider {
 				System.out.println("0.1.0");
 				return;
 			}
-
 			if ((arglist.isEmpty()) || (arglist.contains(H))) {
 				System.out.println(HELP);
 				return;
@@ -80,32 +80,43 @@ class Spider {
 
 			connection = Integer.parseInt((String) arglist.get(0));
 			verbose = arglist.contains(D);
-			message = arglist.get(arglist.indexOf(M) + 1);
-			if (arglist.contains(T))
+			if (arglist.contains(M)) {
+				message = arglist.get(arglist.indexOf(M) + 1);
+			}
+			if (arglist.contains(T)) {
 				node = arglist.get(arglist.indexOf(T) + 1);
+			}
+			if (arglist.contains(C)) {
+				maxThread = Integer.parseInt(arglist.get(arglist.indexOf(C) + 1));
+			}
 		} catch (Exception localException) {
 			System.out.println(localException);
 			System.out.println(HELP);
 			return;
 		}
 
-		System.out.println(new StringBuilder().append("Target: ").append(node).toString());
-
 		String targetNode = "http://localhost:8000/?m=" + message;
 		String targetPhp = "http://localhost:80/target.php?m=" + message;
 		final String target = node.equals("node") ? targetNode : targetPhp;
 
-		final int thread;
-		if (connection < 100) {
-			thread = 1;
-		} else if (connection < 1000) {
-			thread = 10;
-		} else if (connection < 10000) {
-			thread = 50;
-		} else {
-			thread = 250;
-		}
+		int thread = maxThread;
+//		if (connection < 100) {
+//			thread = 1;
+//		} else if (connection < 1000) {
+//			thread = 50;
+//		} else if (connection < 10000) {
+//			thread = 200;
+//		} else {
+//			thread = 500;
+//		}
+//		if (thread > maxThread) {
+//			thread = maxThread;
+//		}
 
+		// Run
+
+		System.out.println("Target: " + node + " " + target);
+		System.out.println("Thread: " + thread);
 		for (int i = 0; i < thread; ++i) {
 			final int connPerThread;
 			if (i == thread - 1) {
@@ -119,9 +130,9 @@ class Spider {
 				public void run() {
 					for (int j = 0; j < connPerThread; j += 1) {
 						try {
-							String str = httpGet(target);
+							String res = httpGet(target);
 							if (Spider.verbose) {
-								System.out.println(String.format("[%d] %s", index * thread + j, str));
+								System.out.println(String.format("[%d] %s #thread%d", j, res, index));
 							}
 						} catch (Exception localException) {
 							System.err.println(localException);
