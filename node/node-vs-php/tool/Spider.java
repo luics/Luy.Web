@@ -14,7 +14,7 @@ class Spider {
 	private static final String D = "-d";
 	private static final String H = "-?";
 	private static final String V = "-v";
-	private static final String C = "-c"; // Max
+	private static final String N = "-n"; // Max Thread Number
 	private static int connection = 100;
 	private static int maxThread = 500;
 	// private static final int MIN_PER_THREAD = 10;
@@ -48,15 +48,16 @@ class Spider {
 	}
 
 	public static void main(String[] args) throws IOException {
-		StringBuilder HELP = new StringBuilder();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(T, "Target: node/php");
-		params.put(D, "display all info");
+		params.put(D, "Display all info");
 		params.put(V, "Version");
 		params.put(H, "Help information");
 		params.put(M, "Message");
+		params.put(N, "Thread number");
 
-		HELP.append(String.format("\n%s\n\nUsage:\njava Spider http-conn-num [options]\n\n", WELCOME));
+		final StringBuilder HELP = new StringBuilder(String.format("\n%s\n\nUsage:\njava Spider http-conn-num [options]\n\n",
+				WELCOME));
 		Iterator<String> itor = params.keySet().iterator();
 		while (itor.hasNext()) {
 			String key = itor.next();
@@ -86,8 +87,8 @@ class Spider {
 			if (arglist.contains(T)) {
 				node = arglist.get(arglist.indexOf(T) + 1);
 			}
-			if (arglist.contains(C)) {
-				maxThread = Integer.parseInt(arglist.get(arglist.indexOf(C) + 1));
+			if (arglist.contains(N)) {
+				maxThread = Integer.parseInt(arglist.get(arglist.indexOf(N) + 1));
 			}
 		} catch (Exception localException) {
 			System.out.println(localException);
@@ -100,18 +101,18 @@ class Spider {
 		final String target = node.equals("node") ? targetNode : targetPhp;
 
 		int thread = maxThread;
-//		if (connection < 100) {
-//			thread = 1;
-//		} else if (connection < 1000) {
-//			thread = 50;
-//		} else if (connection < 10000) {
-//			thread = 200;
-//		} else {
-//			thread = 500;
-//		}
-//		if (thread > maxThread) {
-//			thread = maxThread;
-//		}
+		// if (connection < 100) {
+		// thread = 1;
+		// } else if (connection < 1000) {
+		// thread = 50;
+		// } else if (connection < 10000) {
+		// thread = 200;
+		// } else {
+		// thread = 500;
+		// }
+		// if (thread > maxThread) {
+		// thread = maxThread;
+		// }
 
 		// Run
 
