@@ -18,22 +18,21 @@ mblog.init(DB_CONF, function () {
   var client = mysql.createClient(DB_CONF),
     INSERT = 'INSERT INTO post(user,msg) VALUES (?,?)',
     fd = fs.openSync(JS_LOG, 'a');
-    //count = 0;
+  //count = 0;
 
   http.createServer(
     function (req, res) {
-      //++count;
       var
-        //log = (+new Date),
+        log = (+new Date),
         msg = querystring.parse(req.url.split('?')[1]).m;
 
-//      fs.write(fd, log + '\n');
+      fs.write(fd, log + '\n');
 
       client.query(INSERT, [Math.random() * 200, msg], function (err, info) {
       });
 
       res.writeHead(200, {
-        "Content-Type":"text/html",
+        "Content-Type":"text/plain",
         "Content-Length":11
       });
       res.end('target-node');

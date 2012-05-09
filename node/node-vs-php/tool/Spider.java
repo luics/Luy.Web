@@ -20,7 +20,7 @@ class Spider {
 	// private static final int MIN_PER_THREAD = 10;
 	private static boolean verbose;
 	private static String node = "node";
-	private static String message;
+	private static String message = "";
 	private static final String VERSION = "0.1.0";
 	private static final String WELCOME = String.format("Spider Emulator\nby Luy (luics.king@gmail.com)\n%s", VERSION);
 
@@ -96,7 +96,7 @@ class Spider {
 			return;
 		}
 
-		String targetNode = "http://localhost:8000/?m=" + message;
+		String targetNode = "http://192.168.1.103:8000/?m=" + message;
 		String targetPhp = "http://localhost:80/target.php?m=" + message;
 		final String target = node.equals("node") ? targetNode : targetPhp;
 
