@@ -101,7 +101,7 @@ exports.init = function (option, cb) {
     sqls = Array.isArray(sqls) ? sqls : sqls.split(';');
     for (var i = 0; i < sqls.length; ++i) {
       var sql = sqls[i];
-      sql = sql.replace(/^\s+|\s+$/g, '').replace(/\n/g, '');
+      sql = sql.replace(/^\s+|\s+$/g, ''); //.replace(/\n/g, '');
       //console.log('[sql]', sql);
       if (sql === '') {
         continue;
