@@ -316,7 +316,7 @@ pre { font-size: 14px; }
 /**
 * By Luy
 **/
-.prev{min-height: 200px; overflow: visible;}
+.prev{min-height: 200px; overflow: visible; overflow: auto; word-spacing:normal;}
 .c{clear: both;}
 .con{float: left; padding: 10px;border: 1px dashed #999; margin: 10px 0px 0px 10px;}
 .base64{width: 420px;}

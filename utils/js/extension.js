@@ -1,22 +1,67 @@
-(function () {    
-  String.prototype.format = function () {
-    //throw Errors.notImplemented;
-    var res = this,
-    i;
-      
-    for (i = 0; i < arguments.length; ++i) {
-      //info(i + ':' + arguments[i]);
-      var re = new RegExp('\\{' + i + '\\}', 'g');
-      res = res.replace(re, arguments[i]);
+;//compress 
+(function ($) {
+  console.log('loaded');
+  /**************************************************************************
+   * @namespace baidu.mobads
+   **************************************************************************/
+  $.baidu = $.baidu || {}; //防止与tangram等js库冲突
+  var baidu = $.baidu;
+  
+  /**************************************************************************
+   * @namespace baidu.mobads
+   **************************************************************************/
+  //baidu.mobads = baidu.mobads || {};
+  baidu.mobads = {};
+  
+})(window);
+
+(function (mob) {
+  console.log('loaded');
+  
+  /**************************************************************************
+   * @import
+   **************************************************************************/
+  
+  var win = window;  
+  win.JSON = win.JSON || {
+    stringify: T.json.stringify,
+    parse: T.json.parse
+  }
+  
+  /**************************************************************************
+   * Util Class
+   * @class baidu.mobads.U 
+   **************************************************************************/
+  var U = mob.U = {};
+  
+  U.$ = function (strid) {
+    return document.getElementById(strid);
+  }
+
+  U.f = function () {
+    if(arguments.length == 0){
+      return '';
+    }else if(arguments.length == 1){
+      return arguments[0];
+    }
+    
+    var res = arguments[0], i;    
+    //console.log(arguments.length, T.isObject(arguments[1]));
+    if(arguments.length == 2 && T.isObject(arguments[1])){
+      res = T.format(res, arguments[1]);
+    }else{
+      for (i = 1; i < arguments.length; ++i) {
+        var re = new RegExp('\\{' + (i-1) + '\\}', 'g');
+        res = res.replace(re, arguments[i]);
+      }
     }
     return res;
-  };
-  
-  
+  }
+
   /**************************************************************************
    * Base64
    **************************************************************************/
-  window.Base64 = {};
+  var Base64 = U.Base64 = {}
     
   /* ----------------------------------------------------------------
   Asc: Returns an Integer representing the character code
@@ -29,7 +74,7 @@
 
   Returns: Integer
   ---------------------------------------------------------------- */
-  window.asc = function(c)
+  U.asc = function(c)
   {
     var symbols = " !\"#$%&'()*+'-./0123456789:;<=>?@";
     var loAZ = "abcdefghijklmnopqrstuvwxyz";
@@ -41,13 +86,13 @@
     loc = symbols.indexOf(c);
     if (loc > -1)
     {
-      Ascii_Decimal = 32 + loc;
+      //Ascii_Decimal = 32 + loc;
       return (32 + loc);
     }
     return (0);
   }
   
-  function utf16to8(str) {
+  function utfEncode(str) {
     var out, i, len, c;
     out = "";
     len = str.length;
@@ -67,7 +112,7 @@
     return out;
   }
   
-  function utf8to16(str) {
+  function utfDecode(str) {
     var out, i, len, c;
     var char2, char3;
     out = "";
@@ -97,13 +142,20 @@
     }
     return out;
   }
+ 
+  var rawChars = [//@todo code table
+  //'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+  '0KajD7AZcF2QnPr5fwiHRNygmupUTIXx69BWb-hMCGJo_V8Eskz1YdvL34letqSO'
   
-  var rawChars = [
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
-  '0KajD7AZcF2QnPr5fwiHRNygmupUTIXx69BWb-hMCGJo_V8Eskz1YdvL34letqSO'];
+  //SEG1 0KajD7AZcF2QnPr5f
+  //SEG2 wiHRNygmupUTI
+  //SEG3 Xx69BWb-hMCGJo_V8Eskz1Yd
+  //SEG4 vL34letqSO
+  ];
+  //rawChars.push(SEG1+SEG2+SEG3+SEG4);
   var base64EncodeCharsList = [];
   var base64DecodeCharsList = [];
-  var base64Index = 1;
+  var base64Index = 0;
   var rawDecodeChars = [], i, j;
   for(i = 0; i < 128; ++i){
     rawDecodeChars.push(-1);
@@ -114,7 +166,7 @@
     base64DecodeCharsList.push(rawDecodeChars.slice(0));
     for(j = 0; j < rawChars[i].length; ++j){
       base64EncodeCharsList[i].push(rawChars[i][j]);
-      base64DecodeCharsList[i][window.asc(rawChars[i][j])] = j;
+      base64DecodeCharsList[i][U.asc(rawChars[i][j])] = j;
     }
   }
   //  var base64EncodeChars = base64EncodeCharsList[0];
@@ -147,15 +199,25 @@
    * @return {string}
    */
   Base64.encode = function(str){
-    return _encode(str, base64Index);
+    return _encode(str, base64EncodeCharsList[0]);
   }
   
-  var _encode = function (str, ind) {
+  function _encode(str, base64EncodeChars) {
+    str = str + '';
     var out, i, j, len;
     var c1, c2, c3;
     var PAD = '$';
-    str = utf16to8(str);
-    var base64EncodeChars = base64EncodeCharsList[ind];
+    str = utfEncode(str);
+    
+    //str补足3的整数倍
+    var padlen = ((3-str.length%3))%3;
+    var append = '';
+    while(--padlen >= 0){
+      append += PAD; 
+    }
+    if(append != ''){
+      str += append;
+    }
 
     len = str.length;
     i = j = 0;
@@ -191,16 +253,15 @@
    * @function
    * @param {string} str
    * @return {string}
-   */  
+   */
   Base64.decode = function (str) {
-    return _decode(str, base64Index);    
+    return _decode(str, base64DecodeCharsList[base64Index]);    
   }
   
-  var _decode = function (str, ind) {
+  function _decode (str, base64DecodeChars) {
     var c1, c2, c3, c4;
     var i, j, len, out;
-    var base64DecodeChars = base64DecodeCharsList[ind];
-
+    var PAD = 36; //61:=  36:$
     len = str.length;
     i = j = 0;
     out = [];
@@ -222,7 +283,7 @@
       /* c3 */
       do {
         c3 = str.charCodeAt(i++) & 0xff;
-        if (c3 == 36) return out.join(''); //61:=  36:$
+        if (c3 == PAD) return out.join('');
         c3 = base64DecodeChars[c3];
       } while (i < len && c3 == -1);
       if (c3 == -1) break;
@@ -232,16 +293,77 @@
       /* c4 */
       do {
         c4 = str.charCodeAt(i++) & 0xff;
-        if (c4 == 61) return out.join('');
+        if (c4 == PAD) return out.join('');
         c4 = base64DecodeChars[c4];
       } while (i < len && c4 == -1);
       if (c4 == -1) break;
       out[j++] = String.fromCharCode(((c3 & 0x03) << 6) | c4);
     }
     
-    //return out.join('');
-    //return utfDecode(out.join(''));
-    return utf8to16(out.join('')).replace(/\$+$/, '');
+    //return _utf8_decode(out.join(''));
+    return utfDecode(out.join('')).replace(/\$+$/, '');
+  }
+  
+  U.enc = Base64.encode;
+  U.dec = Base64.decode;  
+  /**************************************************************************
+   * Native Helper
+   **************************************************************************/  
+    
+  /**
+   * @private
+   * @function
+   * @param {function} eventHandler
+   * @param {string} [eventType] 指定类型
+   * @return {string} token
+   */
+  U.natRegEv = function(eventHandler, eventType){
+    //    if(!T.lang.isFunction(eventHandler)){
+    //      throw 'eventHandler is not function';
+    //    }
+    eventType = eventType || '';   
+    U.__events = U.__events || {};
+    
+    //@todo how to improve token value
+    var token = U.f('_{0}_{1}_{2}', eventType, new Date().getTime(), T.number.randomInt(0, 4294967296)); //2^32
+    U.__events[token] = eventHandler;
+    
+    return token;
+  }
+  
+  /**
+   * @private
+   * @function
+   * @param {string} command, or json code in ios
+   * @param {function} handler
+   *         {string} methodName [optional]
+   *         {string} params [optional]
+   */
+  U.natInvoke = function(command, handler){
+    var methodName = arguments.length >= 3 ? arguments[2] : '';
+    var params = arguments.length >= 4 ? arguments[3] : '';
+    
+    //console.log('natInvoke', command, typeof handler, methodName, params);
+    var token = U.natRegEv(handler, 'invoke');
+    if(typeof MobadsSdk != 'undefined' && MobadsSdk.invoke && command != ''){
+      MobadsSdk.invoke(command, token, methodName, params);
+    }else{
+      U.natFireEvent(token, '');
+    }
+  }
+  
+  /**
+   * @function
+   * @param token {string}
+   * @param res {string}
+   */
+  U.natFireEvent = function(token, res){
+    //res = Base64.decode(res);
+    res = res || '';
+    if(token != '' && U.__events && U.__events[token] && T.lang.isFunction(U.__events[token])){
+      U.__events[token](res);      
+      delete U.__events[token];//remove this event
+    }
   }
   
   /**************************************************************************
@@ -252,7 +374,7 @@
    * @function
    * @return {array} [r, g, b]
    */
-  window.parseColor = function(color){
+  U.parseColor = function(color){
     return [(color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF];    
   }
   
@@ -261,7 +383,7 @@
    * @function
    * @return {array} [r, g, b]
    */
-  window.parseBoolean = function(bl){
+  U.parseBoolean = function(bl){
     return ('true' == (bl + '').toLowerCase() ? true : false);      
   }
   
@@ -270,17 +392,16 @@
    * @function
    * @return {string} h|m|l
    */
-  window.parseDensity = function (density) {
+  U.parseDensity = function (density) {
     var v; //, density = Sdk.P.DENSITY;
     if (density >= 2) {//high definition, ios & android
-      v = "h"; 
+      v = "h"; //"h"
     }else if (density >= 1.5){//android 480px width
       v = "m";
     }else{//320px width
-      v = "l";
+      v = "l";//"l"
     }
     
-    console.log('parseDensity', typeof v, v);    
     return v;
   }
   
@@ -292,7 +413,7 @@
    * @param {string} pad
    * @return {string} hex string
    */
-  window.num2hex = function(num, len, pad){
+  U.num2hex = function(num, len, pad){
     num = parseInt(num, 10);
     len = len || 0;
     pad = pad || '0';    
@@ -306,6 +427,51 @@
     
     return hex.join('');
   }
+  
+  /**
+   * Load javascript file, append a <script /> to last script
+   *
+   * @function
+   * @param {string} jsUrl
+   * @param {boolean} asLastOne
+   */
+  U.loadJs = function(jsUrl, asLastOne){
+    asLastOne = asLastOne || false;
+    var d = document;
+    if(asLastOne){
+      var script = d.createElement("script");
+      script.type = "text/javascript";
+      script.async = false;
+      script.src = jsUrl;
+      var s = d.getElementsByTagName("script");
+      s = s[s.length-1];
+      s.parentNode.appendChild(script);      
+    }else{
+      var mark = (U.f('<script type="text/javascript" src="{0}"></'+'script>'), jsUrl);
+      d.write(mark);
+    }
+  }
 
-})();
- 
+  /**
+   * 简单插入排序
+   * 
+   * @param {array} items
+   * @param {function} compare
+   */
+  U.insertSort = function(items, compare){
+    if(!items || !T.lang.isFunction(compare)){
+      return items;
+    }
+    var i, j, k;
+    for(i = 1; i < items.length; ++i){
+      var current  = items[i];
+      for(j = i - 1; j >= 0 && compare(current, items[j]) < 0; --j){}
+      for(k = i; k > j + 1; --k){
+        items[k] = items[k-1];
+      }
+      items[k] = current;
+    }
+    return items;
+  } 
+//end
+})(baidu.mobads); 

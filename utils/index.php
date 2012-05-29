@@ -19,8 +19,8 @@
         <div class="con base64">
           <h3>Base64</h3>
           <textarea id="code"></textarea><br/>
-          <input type="button" value="Decode" onclick="mylog(Base64.decode($('#code').value))" />
-          <input type="button" value="Encode" onclick="mylog(Base64.encode($('#code').value))" />
+          <input type="button" value="Decode" onclick="mylog(baidu.mobads.U.dec($('#code').value))" />
+          <input type="button" value="Encode" onclick="mylog(baidu.mobads.U.enc($('#code').value))" />
           <div id="status" class="prev"></div>
         </div>
 
