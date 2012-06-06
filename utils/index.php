@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/util.css" />
     <script src="js/h5utils.js"></script>
     <script src="js/modernizr.custom.js"></script>
+    <script src="js/extension.js"></script>
+    <script src="js/util.js"></script>
   </head>
   <body>
     <section id="wrapper">
@@ -21,9 +23,9 @@
           <textarea id="code"></textarea><br/>
           <input type="button" value="Decode" onclick="mylog(baidu.mobads.U.dec($('#code').value))" />
           <input type="button" value="Encode" onclick="mylog(baidu.mobads.U.enc($('#code').value))" />
+          <input type="button" value="Dec+JSON" onclick="decJson()" />
           <div id="status" class="prev"></div>
         </div>
-
 
         <div class="con asc">
           <h3>ASCII</h3>
@@ -44,7 +46,5 @@
     </section>
 <!--    <a href="http://github.com/luics"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" /></a>-->
 
-    <script src="js/extension.js"></script>
-    <script src="js/util.js"></script>
   </body>
 </html>

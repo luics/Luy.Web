@@ -44,6 +44,12 @@
     $('#asc').innerHTML += out.join('');
   }
  
+  window.decJson = function(){
+    var v = baidu.mobads.U.dec($('#code').value);
+    console.log(JSON.parse(v));
+    mylog(v);
+  };
+  
   window.onload = function(){
     genAscii();
   };
