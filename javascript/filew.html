@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    
+    <script >
+      //4.0.3
+      log(FileWriter);
+    
+      function opt_errorHandler(){
+        log(arguments);  
+      }
+      
+      window.requestFileSystem('/mnt/sdcard', 1024 * 1024, function(fs) {
+        // fs.root is a DirectoryEntry object.
+        fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
+          fileEntry.createWriter(function(writer) {  // writer is a FileWriter object.
+            var bb = new BlobBuilder();
+            bb.append('Hello World!');
+
+            writer.write(bb.getBlob('text/plain'));
+          }, opt_errorHandler);
+        });
+      }, opt_errorHandler);
+    </script>
+  </head>
+  <body>
+    <div id="log"></div>
+  </body>
+</html>

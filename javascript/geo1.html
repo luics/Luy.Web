@@ -1,0 +1,58 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <script type="text/javascript"> 
+      function watchLocation(successCallback, errorCallback) {
+        successCallback = successCallback || function(){};
+        errorCallback = errorCallback || function(){};
+        // Try HTML5-spec geolocation.
+        var geolocation = navigator.geolocation;
+        if (!geolocation) {
+          errorCallback();
+          return;
+        }
+  
+        if(!window.watchCalled){
+          watchCalled=true;
+          geolocation.getCurrentPosition(function(pos){
+            log('getCurrentPosition success', pos);
+            
+          }, function(){
+            log('error', arguments);  
+          });
+        }
+
+        // We have a real geolocation service.
+        try {
+          function handleSuccess(position) {
+            successCallback(position.coords);
+          }
+
+          geolocation.watchPosition(handleSuccess, errorCallback, {
+            enableHighAccuracy: true,
+            maximumAge: 5000 // 5 sec.
+          });
+        } catch (err) {
+          errorCallback();
+        }
+      }
+
+      function init() {
+        watchLocation(function(coords) {
+          document.getElementById('test').innerHTML = 'coords: ' + coords.latitude + ',' + coords.longitude;
+        }, function(err) {
+          document.getElementById('test').innerHTML = 'error ' + err.code;
+          // error.code can be:
+          //   0: unknown error
+          //   1: permission denied
+          //   2: position unavailable (error response from locaton provider)
+          //   3: timed out
+        });
+      }
+    </script> 
+  </head> 
+
+  <body onload="init()"> 
+    <div id="test">Loading...</div> 
+  </body> 
+</html>

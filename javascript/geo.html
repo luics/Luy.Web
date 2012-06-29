@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+</head>
+
+<body>
+    <div id="log"></div>
+
+<script>
+function log(){
+  var log = document.getElementById('log');
+  var msg = ['>'];
+  for (var i =0;i<arguments.length;++i){
+    var arg = arguments[i]?arguments[i]:'[]';
+    console.log(arg);
+     msg.push((typeof arg == 'object')? JSON.stringify(arg) : arg);
+  }
+  log.innerHTML += msg.join(' ') + '<hr>';
+}
+      
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(pos){
+    log('success', pos);
+  }, function(){
+    log('error', arguments);  
+  });
+} else {
+  log('not supported');
+}
+</script>
+</body>
+</html>

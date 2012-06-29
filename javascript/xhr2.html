@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>Speedtest (XHR2;Full support of mobile)</title>
+	</head>
+	<body>
+	<h1>HTML5 (XMLHttpRequest level2) Speedtest</h1>
+	<p>Support: Firefox 10+, Chrome 17+, Safari 5+(included iOS5)<br />
+	tries 3times transfers (8738Kbytes of BASE64ed /dev/urandom)<br />
+	Server Maximum Bandwidth: 100Mbps, Location: Osaka
+	</p>
+	<h2>Log:</h2>
+		<pre id='log'>preparing...
+
+</pre>
+	<h2 id='progress'></h2>
+	<h2 id='result'></h2>
+	<hr />
+	<p>Valid HTML5 | This Speedtest is OpenSource. You can deploy on your server. <a href="get-speedtest-for-your-server.html">Get Speedtest</a></p>
+	<script>
+		"use strict";
+		var startDate,endDate;
+		var $log = document.getElementById('log');
+		var $res = document.getElementById('result');
+		var $progress = document.getElementById('progress');
+		var times = 0;
+		var glblTimer;
+		var kbps = [];
+		var mbps = [];
+		window.onload = function() {
+			glblTimer = setTimeout(pull,1000);
+		};
+	
+		function pull() {
+				++times;
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', 'http://www.baidu.com', true);
+				
+				// Hack to pass bytes through unprocessed.
+				// xhr.overrideMimeType('text/plain');
+				
+				xhr.onreadystatechange = function(e) {
+					if (this.readyState == 4 && this.status == 200) {
+						endDate = new Date();
+						$log.innerHTML += 'transfer ended\n';
+						//showSpeed();
+						if (times < 3) pull();
+					}
+				}
+				xhr.onprogress = function(e) {
+					$progress.innerHTML = Math.round(e.loaded / e.total * 100) + '%\n';
+				}
+				$log.innerHTML += 'transfer start (please wait patiently)\n';
+				startDate = new Date();
+				xhr.send();
+				xhr = null;
+		}
+	</script>
+	</body>
+</html>

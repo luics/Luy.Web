@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    
+  </head>
+  <body>
+    <input id="file" type="file" onchange="startRead()" />
+    <div id="log"></div>
+    
+    <script >
+      function log(){
+        var log = document.getElementById('log');
+        var msg = ['>'];
+        for (var i =0;i<arguments.length;++i){
+          var arg = arguments[i]?arguments[i]:'[]';
+          console.log(arg);
+           msg.push((typeof arg == 'object')? JSON.stringify(arg) : arg);
+        }
+        log.innerHTML += msg.join(' ') + '<hr>';
+      }
+      
+      /*for(var k in window){
+        if(typeof window[k] == 'function'){
+          log(window[k]);
+        }
+      }*/
+   
+      var fs  = window.requestFileSystem || window.webkitRequestFileSystem || {fs: 'fuck'};
+      log(fs);
+
+      function startRead() {  
+        log('startRead');
+        // obtain input element through DOM 
+  
+        var file = document.getElementById('file').files[0];
+        if(file){
+          getAsText(file);
+        }
+      }
+
+      function getAsText(readFile) {
+        var reader = new FileReader();
+        // Handle progress, success, and errors
+        reader.onprogress = updateProgress;
+        reader.onload = loaded;
+        reader.onerror = errorHandler;
+  
+        // Read file into memory as UTF-16      
+        reader.readAsText(readFile, "UTF-8");
+        setTimeout(function(){
+          log(reader.result, reader, readFile);
+        }, 1000);          
+      }
+
+      function updateProgress(evt) {
+        log(evt);
+
+        if (evt.lengthComputable) {
+          // evt.loaded and evt.total are ProgressEvent properties
+          var loaded = (evt.loaded / evt.total);
+          if (loaded < 1) {
+            // Increase the prog bar length
+            // style.width = (loaded * 200) + "px";
+          }
+        }
+      }
+
+      function loaded(evt) {  
+        log(evt);
+        // Obtain the read file data    
+        //        var fileString = evt.target.result;
+        //        // Handle UTF-16 file dump
+        //        if(utils.regexp.isChinese(fileString)) {
+        //          //Chinese Characters + Name validation
+        //        }
+        //        else {
+        //          // run other charset test
+        //        }
+        // xhr.send(fileString)     
+      }
+
+      function errorHandler(evt) {
+        log(evt);
+        if(evt.target.error.name == "NOT_READABLE_ERR") {
+          // The file could not be read
+        }
+      }
+    </script>
+  </body>
+</html>

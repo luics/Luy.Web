@@ -1,0 +1,22 @@
+<html>
+  <body>
+
+    <script>
+      function useAsyncFS(fs) {
+        // see getAsText example in [FILE-API-ED].
+        fs.root.getFile("already_there.txt", null, function (f) {
+          getAsText(f.file());
+        });
+
+        // But now we can also write to the file; see [FILE-WRITER-ED].
+        fs.root.getFile("logFile", {create: true}, function (f) {
+          f.createWriter(writeDataToLogFile);
+        });
+      }
+      
+      window.requestFileSystem('/mnt/sdcard/init.bat', 1024 * 1024, function(fs) {
+        useAsyncFS(fs);
+      });
+    </script>
+  </body>
+</html>
