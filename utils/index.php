@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/util.css" />
     <script src="js/h5utils.js"></script>
     <script src="js/modernizr.custom.js"></script>
+    <script src="js/tangram.js"></script>
     <script src="js/extension.js"></script>
     <script src="js/util.js"></script>
   </head>
@@ -19,11 +20,15 @@
         <div class="c"></div>
 
         <div class="con base64">
-          <h3>Base64</h3>
+          <h3>Url</h3>
           <textarea id="code"></textarea><br/>
-          <input type="button" value="Decode" onclick="mylog(baidu.mobads.U.dec($('#code').value))" />
-          <input type="button" value="Encode" onclick="mylog(baidu.mobads.U.enc($('#code').value))" />
-          <input type="button" value="Dec+JSON" onclick="decJson()" />
+          <input type="button" value="Base64 Decode" onclick="mylog(baidu.mobads.U.dec($('#code').value))" />
+          <input type="button" value="Base64 Encode" onclick="mylog(baidu.mobads.U.enc($('#code').value))" />
+          <input type="button" value="Dec+JSON" onclick="decJson()" /><br/>
+          <input type="button" value="URL Decode" onclick="mylog(decodeURIComponent($('#code').value))" />
+          <input type="button" value="URL Encode" onclick="mylog(encodeURIComponent($('#code').value))" />
+          <input type="button" value="Jump URL" onclick="mylog(baidu.mobads.U.f($('#jumpUrl').value, encodeURIComponent($('#code').value)))" />
+          <textarea id="jumpUrl" >http://mobads.baidu.com/ads/re.html?url={0}</textarea><br/>
           <div id="status" class="prev"></div>
         </div>
 

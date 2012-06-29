@@ -326,3 +326,4 @@ pre { font-size: 14px; }
 .asc table td{padding-left: 10px;}
 .asc table td .seq{color: #aaa; font-size: 75%;}
 .asc table td .chr{font-size: 100%; font-weight: bold;}
+#jumpUrl{height:1.5em;}

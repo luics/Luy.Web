@@ -20,6 +20,7 @@
     $('#status').innerHTML += '<br>';
   }
 
+
   function genAscii(){
     var out = [];
     var cols = 5;
