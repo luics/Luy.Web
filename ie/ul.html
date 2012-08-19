@@ -1,0 +1,86 @@
+<html>
+  <head>    
+    <title>ul hnav</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+      body{margin:0;padding:0;font-size:12px;font-family:"宋体";}
+
+      /**
+      * 水平导航条
+      */
+      ul.hnav{
+        margin:0px;
+        padding:0px;
+        /*ff:如果不指定，会出现项目符号*/
+        list-style-type:none;
+      }
+      ul.hnav li{
+        float: left;
+        /*由于li原本为block元素，ie6下会失败
+        display: inline-block;*/
+      }
+      ul.hnav li a{
+        margin-right: 2px;
+        display:inline-block;
+        width:10em;
+        height:22px;
+        line-height: 22px;
+        text-align: center;
+        text-decoration:none;
+        border:1px solid #711515;
+        background-color:#c11136;
+        color:#ffffff; 
+      }
+      ul.hnav li a:hover{
+        background-color:#990020;
+        color:#ffff00;
+      }
+
+      /**
+      * 垂直导航条
+      */
+      ul.vnav{
+        margin:0px;
+        padding:0px;
+        /*ff:如果不指定，会出现项目符号*/
+        list-style-type:none;
+      }
+      ul.vnav li a{
+        margin-bottom: 2px;
+        display:inline-block;
+        width:10em;
+        height:22px;
+        line-height: 22px;
+        text-align: center;
+        text-decoration:none;
+        border:1px solid #711515;
+        background-color:#c11136;
+        color:#ffffff; 
+      }
+      ul.vnav li a:hover{
+        background-color:#990020;
+        color:#ffff00;
+      }
+    </style>
+  </head>
+  <body>
+    abc
+    <ul class="hnav">
+      <li><a href="#">首页</a></li>
+      <li><a href="#">新闻</a></li>
+      <li><a href="#">博客</a></li>
+      <li><a href="#">图片</a></li>
+      <li><a href="#">专题</a></li>
+    </ul>
+    <br/><br/>
+    <hr/>
+    abc
+    <ul class="vnav">
+      <li><a href="#">首页</a></li>
+      <li><a href="#">新闻</a></li>
+      <li><a href="#">博客</a></li>
+      <li><a href="#">图片</a></li>
+      <li><a href="#">专题</a></li>
+    </ul>abc
+  </body>
+</html>
