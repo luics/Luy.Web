@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>ie9</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+      body{padding: 0;margin: 0;}
+      div{border:0px solid #a00;}
+
+      /*
+        ie9 9.0.8 
+      margin bug
+      */
+      .wall{
+        height: 45px;
+      }
+      .wall-create{
+        float: left;
+        width: 200px;
+        margin-left: 2em;
+      }
+      .wall-create-empty{
+        height: 80px;
+        line-height: 80px;
+      }
+      .wall-create-btn{
+        width: 150px;
+        height: 36px;
+        line-height: 36px;
+        display: none;
+      }
+      .wall-app-name{
+        font-weight: bold;
+        font-size: 120%;
+      }
+      .wall-create-btn-small{
+        display: inline-block;
+        width: 80px;
+        height: 26px;
+        line-height: 26px;  
+      }
+      .wall-switch{
+        float: right;
+        width: 170px;  
+        text-align: right;
+        margin-right: 2em;
+        border: 1px solid #ddd;
+      }
+
+      .wall-item{
+        display: inline-block;
+        width: 85px;  
+        height: 24px;
+        line-height: 24px; 
+        text-align: center;
+        /*  font-weight: bold;*/
+        text-decoration: none;
+        color:#333;
+        border: 0;
+        background: white;
+        cursor: pointer;
+      }
+
+      .wall-item-cur{
+        color:#fff;
+        background: #52a0ca;
+      }
+      .wall-item-hover{
+        background: #c7e5ec;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="wall" class="wall">
+      <div class="wall-create">
+        <input id="wallAdd" type="button" class="wall-create-btn" value="创建个性推荐页应用" />
+      </div>
+      <div class="wall-switch">
+        
+        <input type="submit" class="wall-item wall-item-cur" value="广告条" /><input type="submit" class="wall-item" value="个性推荐页" />
+      </div>
+    </div>
+  </body>
+</html>
