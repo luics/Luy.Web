@@ -10,4 +10,9 @@ var app = connect();
 app.use(
   function (req, res) {
     res.end('ok ' + (+new Date));
-  }).listen(8080);
+  })
+  .listen(8080, function () {
+    console.log('[inited]', arguments)
+  });
+
+console.log('[start]', function(a, b, c, d){}.length);
