@@ -12,7 +12,5 @@ app.use(
     res.end('ok ' + (+new Date));
   })
   .listen(8080, function () {
-    console.log('[inited]', arguments)
+    console.log('[inited]', 8080)
   });
-
-console.log('[start]', function(a, b, c, d){}.length);
