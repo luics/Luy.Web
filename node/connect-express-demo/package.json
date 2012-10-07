@@ -6,7 +6,8 @@
   "dependencies": {
     "connect": "2.4.5",
     "express": "3.0.0rc4",
-    "jade": "*"
+    "jade": "*",
+    "connect-header": "*"
   },
   "engines": { "node": "*" }
 }

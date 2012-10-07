@@ -4,6 +4,7 @@ var connect = require('connect'),
 
 /*
  * connect
+ * $ curl -d '{"user":{"name":"xukai01","age": 26}}' -H "Content-Type: application/json" http://local:3000
  */
 connect(connect.bodyParser(),
   function (req, res) {
