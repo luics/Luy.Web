@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript" src="md5.js"></script>
+<script>
+function md5(){
+  var hash=hex_md5(document.getElementById("text").value);
+  document.getElementById("result").value=hash;
+}
+function trans(){
+  frm.pwd.value =hex_md5(frm.pwd.value);
+  document.getElementById("result2").value=frm.pwd.value;
+}
+function submit(){
+  //默认的提交处理，自定义的提交前处理方法不要用submit作为函数名
+}
+//onsubmit="pwd.value =hex_md5(pwd.value)"
+</script>
+
+</head>
+<body>
+http://pajhome.org.uk/crypt/md5/<br>
+MD5加密：<br>
+转换前：<input type="text" id="text" style="width:300" value="hello world"/><br>
+转换后：<input type="text" id="result" style="width:300"/><br>
+<input type="button" value="test" onclick="md5()"/>
+<br>
+<form name="frm" >
+name:<input type="text" id="name" /><br>
+password:<input type="password" id="pwd"/><br>
+<input type="button" value="submit" onclick="trans()" /><br>
+加密后的密码：<input type="text" id="result2" style="width:300"/>
+</form>
+</body>
+</html>

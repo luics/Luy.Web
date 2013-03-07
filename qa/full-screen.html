@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html>
+<head>
+  <title>Full Screen Example</title>
+  <style type="text/css">
+      /* make the video stretch to fill the screen in WebKit */
+    :-webkit-full-screen #myvideo {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<p>This is an example of the full-screen API in action. Press the Return or Enter key to toggle full-screen mode.</p>
+<p><strong>To use full-screen mode, you need Firefox 9 or later or Chrome 15 or later.</strong></p>
+<video controls src="http://videos-cdn.mozilla.net/serv/webmademovies/Moz_Doc_0329_GetInvolved_ST.webm"
+       width="640" height="360" id="myvideo">
+</body>
+<script>
+  var videoElement = document.getElementById("myvideo");
+
+  function toggleFullScreen() {
+    if (!document.mozFullScreen && !document.webkitFullScreen) {
+      if (videoElement.mozRequestFullScreen) {
+        videoElement.mozRequestFullScreen();
+      } else {
+        videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else {
+        document.webkitCancelFullScreen();
+      }
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 13) {
+      toggleFullScreen();
+    }
+  }, false);
+</script>
+</html>

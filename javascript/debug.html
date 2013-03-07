@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="Content-Type:text/html;charset=utf-8;">
+  <title>JS Coder</title>
+  <style type="text/css">
+    .__code {
+      width: 300px;
+      display: none;
+      margin-bottom: 0.2em;
+    }
+
+    .__code-src {
+      height: 80px;
+    }
+
+    .__code-wrap {
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<h1>JS Coder</h1>
+
+<input type="text" id="__codeUrl" class="__code __code-url" value=""/>
+<textarea type="text" id="__codeSrc" class="__code __code-src" value=""></textarea>
+<br>
+<select id="__codeSel">
+  <option value="__codeUrl">Code Url</option>
+  <option value="__codeSrc">Code Source</option>
+</select>
+<input type="button" id="__codeRun" value=" Run "/>
+<hr/>
+
+<div class="__code-wrap" id="__codeWrap"></div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="debug.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>loading</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+    .loading {
+      text-align: center;
+      margin-top: 120px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="loading">
+  <img src="loading.gif" alt="loading.."/>
+
+</div>
+
+<div class="loading">
+  <img id="waiting" src="waiting.jpg" style="display:block"/>
+  <img id="result"
+       width="320"
+       style="display:none"/>
+
+  <p>
+    <button id="up" type="button" disabled="disabled" onclick="clickUp()"
+            style="display:none">UP
+    </button>
+    <button id="down" type="button" disabled="disabled" onclick="clickDown()"
+            style="display:none">DOWN
+    </button>
+</div>
+
+</body>
+</html>

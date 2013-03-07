@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8"/>
+</head>
+<body>
+<input id="txt" type="text" onchange="validate(this)"/>
+<button onchange="validate()"> 验证</button>
+<label id="tip" style="color: #a00;"></label>
+<script>
+  function validate() {
+    var txt = document.getElementById('txt');
+    var tip = document.getElementById('tip');
+    tip.innerHTML = '';
+    var regex = /^\d*(\.\d{2,2})?$/;
+    if (regex.test(txt.value)) {
+      tip.innerHTML = 'pass';
+    }
+    else {
+      tip.innerHTML = 'fail';
+      txt.value = '';
+    }
+  }
+</script>
+</body>
+</html>

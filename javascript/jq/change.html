@@ -1,0 +1,10 @@
+<select id="sel" style="width: 100px;">
+  <option value="0">0</option>
+  <option value="1">1</option>
+</select>
+<script type="text/javascript">
+  $('#sel').change(
+      function () {
+        log('change', $(this).val());
+      }).change();
+</script>

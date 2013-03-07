@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+
+Input: <input id="text" type="text" value="" onkeyup="filter(event)"/>
+<br>
+IME: <input id="ime" type="text" value="" />
+
+<script>
+  function filter(e) {
+    e = e || window.event;
+//    console.log(e.keyCode);
+//    if (e.shiftKey && e.keyCode === 50) {
+//      console.log('hit');
+//      //e.stopPropagation();
+//      e.keyCode=0;
+//      e.returnValue = false;
+//      return false;
+//    }
+    var ime = document.getElementById('ime');
+    var text = document.getElementById('text');
+    ime.value = text.value.replace(/@.*$/g, '');
+  }
+</script>
+</body>
+</html>

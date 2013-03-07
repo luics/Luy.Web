@@ -1,0 +1,17 @@
+{
+  "name":"connect-express-module-demo",
+  "description":"Baidu internal demo, contact me before sharing with guy outside",
+  "version":"0.0.1",
+  "author":"xukai <xukai01@baidu.com>",
+  "dependencies":{
+    "connect":"2.4.5",
+    "express":"3.0.0rc4",
+    "jade":"*",
+    "connect-header":"*",
+    "markdown-util":"*"
+  },
+  "engines":{
+    "node":"*"
+  }
+}
+
