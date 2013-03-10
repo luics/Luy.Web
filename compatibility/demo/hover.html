@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>hover {2}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+      body{padding: 0;margin: 0;}
+      div{border:1px solid #a00;}
+
+      /*
+        ie6 <a />没有href时：hover失效
+      */
+      a{ display: inline-block;width: 60px; height: 22px; line-height: 22px; background: #999;  }
+      a:hover{color: red;}
+    </style>
+  </head>
+  <body>
+    <a href="#" >hover1</a><br/>
+    <a>hover2</a><br/>
+  </body>
+</html>

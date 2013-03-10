@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>hack {1}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+      body{padding: 0;margin: 0;}
+      div{border:1px solid #a00;}
+
+      /*
+        ie6不认识!important
+      */
+      .class1{
+        width: 400px !important; /* IE7+FF */        
+        width: 200px; /* IE6 */
+        height: 100px;
+      }
+
+      /*
+        只有ie6认识_property
+      */
+      .class2{
+        width: 400px ;    
+        _width: 200px;
+        height: 100px;
+      }
+
+
+      /*
+        HACKs        IE6  IE7  IE8  FF2  FF3  Opera9.5
+        >property    Y    Y    N    N    N    N
+        .property    Y    Y    N    N    N    N
+        *property    Y    Y    N    N    N    N
+        _property    Y    N    N    N    N    N
+        !important   N    Y    Y    Y    Y    Y      
+        
+        书写的顺序都是firefox的写在前面，IE7的写在中间，IE6的写在后面。
+        
+        参见 http://www.cnblogs.com/it563/articles/1225095.html
+      */
+      .class3{
+        color:brown !important;  /*用于Opera、Firefox2、Firefox3等现代浏览器*/  
+        >color:green !important;    /*IE7、IE8可以识别该规则，因此它覆盖掉了上一条规则*/  
+        color:red;  /*所有浏览器都可以识别，但是以上两条规则有!important，所以这条规则被忽视；只有IE6认识并覆盖掉上两条规则*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="class1"></div>
+    <div class="class2"></div>
+    <div class="class3">HACKS TEXT COLOR: IE6 red, IE7 green, FF brown</div>
+  </body>
+</html>

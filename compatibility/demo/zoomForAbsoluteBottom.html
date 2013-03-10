@@ -1,0 +1,44 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="base.css">
+	<style>
+		.wrapper { height:30px; width:200px; line-height:30px; }
+		.inner { right:-5px; bottom:-5px; height:20px; line-height:20px; }
+	</style>
+</head>
+<body>
+	场景：一个表格td，里面要显示推广计划名，和浮层的操作按钮<br><br>
+	
+	方案一：先写推广计划，然后用一个relative的div包absolute的浮层
+	<div class="mg5 pd5 red border wrapper">
+		推广计划<div class="rel">
+			<div class="abs blue inner">click</div>
+		</div>
+	</div>
+	失败，ie6下被撑开<br><br><br>
+	
+	方案二：写一个relative的div，里面包推广计划和absolute的浮层
+	<div class="mg5 pd5 red border wrapper">
+		<div class="rel">推广计划
+			<div class="abs blue inner">click</div>
+		</div>
+	</div>
+	失败，ie6、7下，浮层错位<br><br><br>
+	
+	方案三：把relative属性干脆放外层div中
+	<div class="mg5 pd5 red border wrapper rel">
+		推广计划<div class="abs blue inner" style="right:0;bottom:0">click</div>
+	</div>
+	ok，但最外层的div是控件生成的，是一个class为ui-table-cell-text的div<br><br><br>
+	
+	方案四：写一个relative的div并加上zoom:1，里面包推广计划和absolute的浮层
+	<div class="mg5 pd5 red border" style="height:30px;width:200px;line-height:30px">
+		<div class="rel zm">推广计划
+			<div class="abs blue inner">click</div>
+		</div>
+	</div>
+	内部relative的div加一个zoom:1即可。注意，设置height:100%也行<br><br><br>
+</body>
+</html>

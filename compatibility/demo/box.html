@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">-->
+<html>
+<head>
+  <title>box model {1}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+    body {
+      padding: 0;
+      margin: 0;
+      background: url(ruler.png) no-repeat;
+    }
+
+    div {
+      border: 5px solid #a00;
+    }
+
+      /*
+        QuirkMode(怪异模式/混杂模式)
+        
+        表现： 
+          ie6、7、8（未加doctype或doctype触发quick mode） 
+          box model中width的计算：border + padding + innerwidth，
+          而标准计算方式中只有innerwidth        
+        解决办法：
+          合适的doctype <!DOCTYPE html>
+          http://w3help.org/zh-cn/kb/001
+      */
+    .class2 {
+      width: 400px;
+      /*height : 60px ;*/
+      height : 60px !important;
+      padding: 20px;
+      margin: 20px;
+    }
+
+    .class2{
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="class2">demo text</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form,
+fieldset, input, textarea, p, blockqueue, th, td { margin:0; padding:0; }
+table { border-collapse:collpase; border-spacing:0; }
+fieldset, img { border:0; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal; }
+ol, ul { list-style:none; }
+caption, th { text-align:left; }
+h1, h2, h3, h4, h5, h6 { font-size:100%; font-weight:normal; }
+q:before, q:after { content:''; }
+abbr, acroym { border:0; } 
+
+.cb { clear:both; }
+.cl { clear:left; }
+.cr { clear:right; }
+.fl { float:left; }
+.fr { float:right; }
+.rel { position:relative; }
+.abs { position:absolute; }
+.zm { zoom:1; }
+.mg5 { margin:5px; }
+.pd5 { padding:5px; }
+.red { background-color:red; }
+.blue { background-color:blue; }
+.border { border:1px solid #000; }
+.ofw { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>inline-block</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+      body{padding: 0;margin: 0;}
+      div, span{border:1px solid #a00;}
+
+      /*
+        block元素使用inline-block，在ie6,7，下仍然会换行; ie8修复
+        inline元素使用inline-block可正常工作
+      */
+      .class1{ display:inline-block; width:100px; height: 100px; }
+    </style>
+  </head>
+  <body>
+    <div class="class1"></div><div class="class1"></div>
+    <hr/>    
+    <span class="class1"></span><span class="class1"></span>
+  </body>
+</html>
