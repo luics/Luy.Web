@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<script type="text/javascript">
+  var y = 'global';
+  function constructFunction() {
+    var y = 'local';
+    return new Function('return y');
+  }
+
+  function closureFunction() {
+    var y = 'local';
+    return function() {
+      return y;
+    }
+  }
+  alert(constructFunction()());
+  alert(closureFunction()());
+</script>
+</body>
+</html>

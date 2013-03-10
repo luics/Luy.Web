@@ -1,8 +1,8 @@
 #Luy.Web
 
-Luy's Web Development toolkit.
+Luics's Web Development toolkit.
 
-by [**Luy**](mailto:luics.king@gmail.com), from 2012-04-28
+by [**Luics**](mailto:luics.xu@gmail.com), from 2012-04-28
 
 ## Structure
 

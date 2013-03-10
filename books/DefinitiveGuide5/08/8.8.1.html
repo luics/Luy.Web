@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<script type="text/javascript">
+  console.log('case 1');
+  (function() {
+    var a = 1;
+    var b = {};
+    (function() {
+      console.log(a);
+      console.log(b);
+    })();
+
+    b.p = 2;
+  })();
+
+
+  console.log('case 2');
+  var f2;
+  function f1() {
+    var a = 1;
+    var b = {};
+    f2 = function() {
+      console.log(a);
+      console.log(b);
+    };
+
+    b.p = 2;
+  }
+
+  f1();
+  f2();
+</script>
+</body>
+</html>
