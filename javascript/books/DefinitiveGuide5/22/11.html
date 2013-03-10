@@ -1,0 +1,94 @@
+<html>
+<head>
+<script>
+// Create and return a new canvas tag with the specified id and size.
+// Note that this method does not add the canvas to the document
+function makeCanvas(id, width, height) {
+    var canvas = document.createElement("canvas");
+    canvas.id = id;
+    canvas.width = width;
+    canvas.height = height;
+    return canvas;
+}
+
+/**
+ * Draw a pie chart in the canvas specified by element or id.
+ * Data is an array of numbers: each number represents a wedge of the chart.
+ * The pie chart is centered at (cx, cy) and has radius r.
+ * The colors of the wedges are HTML color strings in the colors[] array.
+ * A legend appears at (lx,ly) to associate the labels in the labels[]
+ * array with each of the colors.
+ */
+function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
+    // Get the canvas if specified by id
+    if (typeof canvas == "string") canvas = document.getElementById(canvas);
+
+    // We draw with the canvas' drawing context
+    var g = canvas.getContext("2d");
+
+    // All the lines we draw are 2 pixel wide black lines
+    g.lineWidth = 2;
+    g.strokeStyle = "black";
+    
+    // Total the data values
+    var total = 0;
+    for(var i = 0; i < data.length; i++) total += data[i];
+    
+    // And compute the angle (in radians) for each one
+    var angles = []
+    for(var i = 0; i < data.length; i++) angles[i] = data[i]/total*Math.PI*2;
+    
+    // Now, loop through the wedges of the pie
+    startangle = -Math.PI/2;  // Start at 12 o'clock instead of 3 o'clock
+    for(var i = 0; i < data.length; i++) {
+        // This is the angle where the wedge ends
+        var endangle = startangle + angles[i];
+        
+        // Draw a wedge
+        g.beginPath();              // Start a new shape
+        g.moveTo(cx,cy);            // Move to center
+        // Line to startangle point and arc to endangle
+        g.arc(cx,cy,r,startangle, endangle, false); 
+        g.closePath();              // Back to center and end shape
+        g.fillStyle = colors[i];    // Set wedge color
+        g.fill();                   // Fill the wedge
+        g.stroke();                 // Outline ("stroke") the wedge
+
+        // The next wedge starts where this one ends.
+        startangle = endangle;
+
+        // Draw the rectangle in the legend for this wedge
+        g.fillRect(lx, ly+30*i, 20, 20);
+        g.strokeRect(lx, ly+30*i, 20, 20);
+
+        // And put a label next to the rectangle.
+        // The Canvas API does not support text, so we just do
+        // ordinary html text here.  We use CSS positioning to put the text
+        // in the right spot on top of the Canvas element.  This would be
+        // a little cleaner if the canvas tag was itself absolutely positioned
+        var label = document.createElement("div");
+        label.style.position = "absolute";
+        label.style.left = (canvas.offsetLeft + lx+30)+"px";
+        label.style.top = (canvas.offsetTop+ly+30*i-4) + "px";
+        label.style.fontFamily = "sans-serif";
+        label.style.fontSize = "16px";
+        label.appendChild(document.createTextNode(labels[i]));
+        document.body.appendChild(label);
+    }
+}
+
+function init() {
+    // Create a canvas element
+    var canvas = makeCanvas("canvas", 600, 400);
+    // Add it to the document
+    document.body.appendChild(canvas);
+    // And draw a pie chart in it
+    pieChart("canvas", [12, 23, 34, 45], 200, 200, 150,
+             ["red", "blue", "yellow", "green"],
+             ["North", "South", "East", "West"],
+             400, 100);
+}
+</script>
+</head>
+<body onload="init()"></body>
+</html>

@@ -1,0 +1,148 @@
+<html>
+<head>
+<script>
+// Embed a Flash canvas of the specified size, inserting it as the sole
+// child of the specified container element. For portability, this function
+// uses an <embed> tag in Netscape-style browsers and an <object> tag in others
+// Inspired by FlashObject from Geoff Stearns.
+// See http://blog.deconcept.com/flashobject/
+function insertCanvas(containerid, canvasid, width, height) {
+    var container = document.getElementById(containerid);
+    if (navigator.plugins && navigator.mimeTypes&&navigator.mimeTypes.length){
+        container.innerHTML = 
+            "<embed src='Canvas.swf' type='application/x-shockwave-flash' " +
+            "width='" + width + 
+            "' height='" + height +
+            "' bgcolor='#ffffff' " +
+            "id='" + canvasid + 
+            "' name='" + canvasid +
+            "'>"; 
+    }
+    else {
+        container.innerHTML = 
+            "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' "+
+            "width='" + width +
+            "' height='" + height +
+            "' id='"+ canvasid + "'>" +
+            "  <param name='movie' value='Canvas.swf'>" +
+            "  <param name='bgcolor' value='#ffffff'>" +
+            "</object>";
+    }
+}
+
+// The Flash drawing API is lower-level than others, with only a simple 
+// bezier-curve primitive.  This method draws a pie wedge using that API.
+// Note that angles must be specified in radians.
+function wedge(canvas, cx, cy, r, startangle, endangle, color) {
+    // Figure out the starting point of the wedge
+    var x1 = cx + r*Math.sin(startangle);
+    var y1 = cy - r*Math.cos(startangle);
+
+    canvas.beginFill(color, 100); // Fill with specified color, fully opaque
+    canvas.moveTo(cx, cy);        // Move to center of circle
+    canvas.lineTo(x1, y1);        // Draw a line to the edge of the circle
+
+    // Now break the arc into pieces < 45 degrees and draw each
+    // with a separate call to the nested arc() method
+    while(startangle < endangle) {
+        var theta;
+        if (endangle-startangle > Math.PI/4) theta = startangle+Math.PI/4;
+        else theta = endangle;
+        arc(canvas,cx,cy,r,startangle,theta);
+        startangle += Math.PI/4;
+    }
+
+    canvas.lineTo(cx, cy);        // Finish with a line back to the center
+    canvas.endFill();             // Fill the wedge we've outlined
+
+    // This nested function draws a portion of a circle using a Bezier curve.
+    // endangle-startangle must be <= 45 degrees
+    // The current point must already be at the startangle point.
+    // You can take this on faith if you don't understand the math.
+    function arc(canvas, cx, cy, r, startangle, endangle) {
+        // Compute end point of the curve
+        var x2 = cx + r*Math.sin(endangle);
+        var y2 = cy - r*Math.cos(endangle);
+
+        var theta = (endangle - startangle)/2;
+        // This is the distance from the center to the control point
+        var l = r/Math.cos(theta);
+        // angle from center to control point is:
+        var alpha = (startangle + endangle)/2;
+
+        // Compute the control point for the curve
+        var controlX = cx + l * Math.sin(alpha);
+        var controlY = cy - l * Math.cos(alpha);
+
+        // Now call the Flash drawing API to draw the arc as a Bezier curve.
+        canvas.curveTo(controlX, controlY, x2, y2);
+    }
+}
+
+/**
+ * Draw a pie chart in the Flash canvas specified by element or id.
+ * data is an array of numbers: each number corresponds to a wedge of the chart
+ * The pie chart is centered at (cx, cy) and has radius r.
+ * The colors of the wedges are Flash color values in the colors[] array.
+ * A legend appears at (lx,ly) to associate the labels in the labels[]
+ * array with each of the colors.
+ */
+function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
+    // Get the canvas if specified by id
+    if (typeof canvas == "string")
+        canvas = document.getElementById(canvas);
+
+    // All the lines we draw are 2 pixels wide, black, and 100% opaque.
+    canvas.lineStyle(2, 0x000000, 100);
+
+    // Figure out the total of the data values
+    var total = 0;
+    for(var i = 0; i < data.length; i++) total += data[i];
+    
+    // And compute the angle (in radians) for each one.
+    var angles = []
+    for(var i = 0; i < data.length; i++) angles[i] = data[i]/total*Math.PI*2;
+    
+    // Now, loop through the wedges of the pie
+    startangle = 0; 
+    for(var i = 0; i < data.length; i++) {
+        // This is the angle where the wedge ends
+        var endangle = startangle + angles[i];
+        
+        // Draw a wedge: this function is defined earlier
+        wedge(canvas, cx, cy, r, startangle, endangle, colors[i]);
+
+        // The next wedge starts where this one ends.
+        startangle = endangle;
+
+        // Draw a box for the legend
+        canvas.beginFill(colors[i], 100);
+        canvas.moveTo(lx, ly+30*i);
+        canvas.lineTo(lx+20, ly+30*i);
+        canvas.lineTo(lx+20, ly+30*i+20);
+        canvas.lineTo(lx, ly+30*i+20);
+        canvas.lineTo(lx, ly+30*i);
+        canvas.endFill();
+
+        // Add text next to the box
+        canvas.addText(labels[i], lx+30, ly+i*30, 100, 20, // Text and position
+                       i, // each text field must have a different depth
+                       "Helvetica", 16);                   // Font info
+    }
+}
+
+// When the document loads, insert a Flash canvas and draw on it
+// Note that colors in Flash are integers instead of strings
+window.onload = function() {
+    insertCanvas("placeholder", "canvas", 600, 400); 
+    pieChart("canvas", [12, 23, 34, 45], 200, 200, 150,
+             [0xff0000, 0x0000ff, 0xffff00, 0x00ff00],
+             ["North", "South", "East", "West"],
+             400, 100);
+}
+</script>
+</head>
+<body>
+<div id="placeholder"></div>
+</body>
+</html>

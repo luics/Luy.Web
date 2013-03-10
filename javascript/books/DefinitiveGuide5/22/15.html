@@ -1,0 +1,59 @@
+<head>
+<script>
+// Draw a pie chart using the Java Canvas applet
+function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
+    // Locate canvas by name if needed
+    if (typeof canvas == "string") canvas = document.getElementById(canvas);
+
+    // All lines are 2 units thick.  All text is 16pt bold sans-serif.
+    canvas.setLineWidth(2);
+    canvas.setFont("SansSerif", 16);
+   
+    // Add up the data
+    var total = 0;
+    for(var i = 0; i < data.length; i++) total += data[i];
+    
+    // Compute wedge angles in degrees
+    var angles = []
+    for(var i = 0; i < data.length; i++) angles[i] = data[i]/total*360;
+    
+    startangle = 90;  // Start at 12 o'clock instead of 3 o'clock
+    // Loop through the wedges
+    for(var i = 0; i < data.length; i++) {
+        // This object describes one wedge of the pie
+        var arc = canvas.createWedge(cx-r, cy-r, r*2, r*2,
+                                     startangle, -angles[i]);
+        canvas.setColor(colors[i]);             // Set this color
+        canvas.fill(arc);                       // Fill the wedge
+        canvas.setColor(0x000000);              // Switch to black
+        canvas.draw(arc);                       // Outline the wedge
+
+        startangle -= angles[i]; // for next time
+
+        // Now draw the box in the legend
+        canvas.setColor(colors[i]);             // Back to wedge color
+        canvas.fillRect(lx, ly+30*i, 20, 20);   // Fill the box
+        canvas.setColor(0x000000);              // Back to black again
+        canvas.drawRect(lx, ly+30*i, 20, 20);   // Outline the box
+
+        // And draw the label for each wedge
+        // Remember that we set the font earlier
+        canvas.drawString(labels[i], lx+30, ly+30*i+18);
+    }
+    // Tell the applet to display itself
+    canvas.repaint();  // Don't forget to call this
+}
+
+// This function is invoked when the Draw! button is clicked
+function draw() {
+    pieChart("canvas", [12, 23, 34, 45], 200, 200, 150,
+             [0xff0000, 0x0000ff, 0xffff00, 0x00ff00], // Colors are integers
+             ["North", "South", "East", "West"],
+             400, 100);
+}
+</script>
+</head>
+<body>
+<applet id="canvas" code="Canvas.class" width=600 height=400></applet>
+<button onclick="draw()">Draw!</button>
+</body>

@@ -1,0 +1,29 @@
+<html>
+<!-- Load our XML utilities for data islands and templates -->
+<head><script src="xml.js"></script></head>
+<!-- Expand all templates on document load -->
+<body onload="XML.expandTemplates()">
+
+<!-- This is an XML data island with our data -->
+<xml id="data" style="display:none"> <!-- hidden with CSS -->
+  <contacts>
+    <contact name="Able Baker"><email>able@example.com</email></contact>
+    <contact name="Careful Dodger"><email>dodger@example.com</email></contact>
+    <contact name="Eager Framer"><email>framer@example.com</email></contact>
+  </contacts>
+</xml>
+
+<!-- These are just regular HTML elements -->
+<table>
+<tr><th>Name</th><th>Address</th></tr>
+<!-- This is a template.  Data comes from the data island with id "data". -->
+<!-- The template will be expanded and copied once for each <contact> tag -->
+<tr datasource="#data" foreach="//contact">
+<!-- The "name" attribute of the <contact> is inserted into this element -->
+<td data="@name"></td>
+<!-- The content of the <email> child of the <contact> goes in here -->
+<td data="email"></td>
+</tr> <!-- end of the template -->
+</table>
+</body>
+</html>

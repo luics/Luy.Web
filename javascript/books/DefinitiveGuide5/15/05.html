@@ -1,0 +1,34 @@
+<script>
+function sortkids(e) {
+     // This is the element whose children we are going to sort
+     if (typeof e == "string") e = document.getElementById(e);
+
+     // Transfer the element (but not text node) children of e to a real array
+     var kids = [];
+     for(var x = e.firstChild; x != null; x = x.nextSibling)
+         if (x.nodeType == 1 /* Node.ELEMENT_NODE */) kids.push(x);
+
+     // Now sort the array based on the text content of each kid.
+     // Assume that each kid has only a single child and it is a Text node
+     kids.sort(function(n, m) { // This is the comparator function for sorting
+                   var s = n.firstChild.data; // text of node n
+                   var t = m.firstChild.data; // text of node m
+                   if (s < t) return -1;      // n comes before m
+                   else if (s > t) return 1;  // n comes after m
+                   else return 0;             // n and m are equal
+               });
+
+     // Now append the kids back into the parent in their sorted order.
+     // When we insert a node that is already part of the document, it is
+     // automatically removed from its current position, so reinserting
+     // these nodes automatically moves them from their old position
+     // Note that any text nodes we skipped get left behind, however.
+     for(var i = 0; i < kids.length; i++) e.appendChild(kids[i]);
+}
+</script>
+
+<ul id="list"> <!-- This is the list we'll sort -->
+<li>one<li>two<li>three<li>four <!-- items are not in alphabetical order -->
+</ul>
+<!-- this is the button that sorts the list -->
+<button onclick="sortkids('list')">Sort list</button>

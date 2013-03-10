@@ -1,0 +1,30 @@
+<script src="Cookie.js"></script><!-- include the cookie class -->
+<script>
+// Create the cookie we'll use to save state for this web page.
+var cookie = new Cookie("vistordata");
+
+// First, try to read data stored in the cookie. If the cookie doesn't 
+// exist yet (or doesn't have the data we expect), query the user
+if (!cookie.name || !cookie.color) {
+    cookie.name = prompt("What is your name:", "");
+    cookie.color = prompt("What is your favorite color:", "");
+}
+
+// Keep track of how many times this user has visited the page
+if (!cookie.visits) cookie.visits = 1;
+else cookie.visits++;
+
+// Store the cookie data, which includes the updated visit count.  We set
+// the cookie lifetime to 10 days.  Since we don't specify a path, this
+// cookie will be accessible to all web pages in the same directory as this
+// one or "below" it.  We should be sure, therefore that the cookie
+// name, "visitordata" is unique among these pages.
+cookie.store(10);
+
+// Now we can use the data we obtained from the cookie (or from the
+// user) to greet a user by name and in her favorite color.
+document.write('<h1 style="color:' + cookie.color + '">' +
+               'Welcome, ' + cookie.name + '!' + '</h1>' +
+               '<p>You have visited ' + cookie.visits + ' times.' + 
+               '<button onclick="window.cookie.remove();">Forget Me</button>');
+</script>

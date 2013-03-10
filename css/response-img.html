@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    .mod .hd h3 {
+      width: 105px;
+      height: 160px;
+
+      background-size: 35px 55px;
+      background-image:url(http://img02.taobaocdn.com/tps/i2/T10s3JXn4XXXXnbIAn-105-160.png);/* 普通屏幕 */
+    }
+
+      /* ------------- Retina ------------- */
+    @media only screen and (-o-min-device-pixel-ratio: 2/1), /* Opera */
+    only screen and (min--moz-device-pixel-ratio: 2), /* Firefox 16 之前 */
+    only screen and (-webkit-min-device-pixel-ratio: 2), /* Webkit */
+    only screen and (min-resolution: 240dpi), /* 标准 */
+    only screen and (min-resolution: 2dppx) /* 标准 */
+    {
+      .mod .hd h3{
+        background-image:url(http://img04.taobaocdn.com/tps/i4/T1947tXmJhXXcCfooh-210-320.png);
+        background-size: 105px 155px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="mod">
+  <div class="hd">
+    <h3></h3>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<script>
+// When an ActionScript function is exported with ExternalInterface.addCallback,
+// we can just call it as a method of the Flash object.
+function draw() {
+    var flash = window.movie || document.movie; // Get Flash object
+    return flash.drawBox(100, 100, 100, 50);    // Just invoke a function on it
+}
+
+// These are functions Flash will call with ExternalInterface.call()
+function flashReady() { document.f.button.disabled = false; }
+function reportMouseClick(x, y) { alert("click: " + x + ", " + y); }
+</script>

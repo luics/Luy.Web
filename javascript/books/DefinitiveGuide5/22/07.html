@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                      "http://www.w3.org/TR/html4/loose.dtd">
+<!-- The drawing won't look right in IE without a doctype like this -->
+<html>
+<head>
+<script src="CSSDrawing.js"></script> <!-- Include our drawing class -->
+<style>
+/* Styles for the figure box itself */
+.figure { border: solid black 2px; background-color: #eee;}
+/* Styles for grid lines */
+.grid { border: dotted black 1px; opacity: .1; }
+/* Styles for boxes in the figure */
+.boxstyle {
+    border: solid black 2px;
+    background: #aaa;
+    padding: 2px 10px 2px 10px;
+    font: bold 12pt sans-serif;
+    text-align: center;
+}
+/* styles for line connecting the boxes */
+.boldline { border: solid black 2px; }
+</style>
+
+<script>
+// Draw a grid in the specfied rectangle with dx,dy line spacing
+function drawGrid(drawing, x, y, w, h, dx, dy) {
+    for(var x0 = x; x0 < x +w; x0 += dx) 
+        drawing.vertical(x0, y, h, "grid");
+    for(var y0 = y; y0 < y + h; y0 += dy)
+        drawing.horizontal(x, y0, w, "grid");
+}
+
+function drawFigure() {
+    // Create a new figure
+    var figure = new CSSDrawing(500, 200, "figure");
+
+    // Add a grid to the drawing
+    drawGrid(figure, 0, 0, 500, 200, 25, 25);
+
+    // Draw four boxes in the figure
+    figure.box(200, 50, 75, 25, "Life", "boxstyle");        // top box
+    figure.box(50, 125, 75, 25, "Archaea", "boxstyle");     // line of 3
+    figure.box(200, 125, 75, 25, "Bacteria", "boxstyle");   // ..boxes below
+    figure.box(350, 125, 75, 25, "Eukaryota", "boxstyle");  // ..the top one
+
+    // This line is drawn down from the bottom center of the top "Life" box.
+    // The starting y position of this line is 50+25+2+2+2+2 or 
+    // y + height + top border + top padding + bottom padding + bottom border
+    // Note that this computation requires knowledge of both the code and
+    // the stylesheet, which is is not ideal.
+    figure.vertical(250, 83, 20, "boldline");
+
+    figure.horizontal(100, 103, 300, "boldline");  // line above 3 lower boxes
+    figure.vertical(100, 103, 22, "boldline");     // connect to "archaea"
+    figure.vertical(250, 103, 22, "boldline");     // connect to "bacteria"
+    figure.vertical(400, 103, 22, "boldline");     // connect to "eukaryota"
+
+    // Now insert the figure into the document, replacing the placeholder 
+    figure.replace("placeholder");
+}
+</script>
+</head>
+<body onload="drawFigure()">
+<div id="placeholder"></div>
+</body>
+</html>

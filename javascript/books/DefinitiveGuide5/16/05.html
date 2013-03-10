@@ -1,0 +1,14 @@
+<!-- This div is the element we are animating -->
+<div id="urgent"><h1>Red Alert!</h1>The Web server is under attack!</div>
+
+<script>  
+var e = document.getElementById("urgent");         // Get Element object
+e.style.border = "solid black 5px";                // Give it a border
+e.style.padding = "50px";                          // And some padding
+var colors = ["white", "yellow", "orange", "red"]  // Colors to cycle through
+var nextColor = 0;                                 // Position in the cycle
+// Invoke the following function every 500 milliseconds to animate border color
+setInterval(function() {
+                e.style.borderColor=colors[nextColor++%colors.length];
+            }, 500);
+</script>

@@ -1,0 +1,202 @@
+			     Examples From
+	    JavaScript: The Definitive Guide, Fifth Edition
+
+This is the source code for all the numbered examples in the 5th edition
+of JavaScript: The Definitive Guide.  The sub-directories of this
+directory correspond to chapter numbers in the printed book.  Within
+those sub-directories, many of the example files are named with the
+example number.  Thus the file 10/02.js is the content of Example
+10-2. Some of the examples are substantial enough that you may find them
+useful in your own programs. In these cases, the example has a name
+rather than a number.  Example 15-9, for example is stored in
+15/Log.js. In these cases, the file name is often identified in the
+book, so you can know what file you are looking for.  Also, there is a
+table below that maps example numbers to file names.
+
+Chapters 20 and 21 contain a number of short examples that logically
+belong to a single large module.  The files 20/http.js and 21/xml.js are
+concatenated versions of these shorter numbered examples.
+
+Most of the examples are .js files of JavaScript code or .html files of
+HTML code. A few others are of other types, as explained in the book.
+
+Legal matters: these examples were written by David Flanagan and are
+Copyright (c) 2006 by O'Reilly Media Inc.  If you wish to use this
+example code in your own programs, simply include proper attribution, in
+your program source code and documentation.  A comment like this one is
+suitable in source code:
+
+ /*
+  * The following code is from the book JavaScript: The Definitive Guide,
+  * 5th Edition, by David Flanagan. Copyright 2006 O'Reilly Media, Inc.
+  * (ISBN: 0596101996)
+  */
+
+Note that you may use these examples in your code, but you may not
+republish them in other books, or in any other way that would compete
+with O'Reilly.  For details, see
+http://www.oreilly.com/pub/a/oreilly/ask_tim/2001/codepolicy.html for
+the "O'Reilly Policy on Re-Use of Code Examples from Books".
+
+Also, please note that these examples are provided "as-is" and come with
+no warranty of any kind.
+
+The table that follows lists example numbers and their corresponding
+filenames, and also includes a short description of the example.
+
+Example	  File		      Description
+----------------------------------------------------------------------------
+1-1	01/01.html	      A simple JavaScript program
+1-2	01/02.html	      An HTML button with a JavaScript event
+			      handler defined
+1-3	01/03.html	      Computing loan payments with JavaScript
+
+3-1	03/01.js	      Copying, passing, and comparing by value
+3-2	03/02.js	      Copying, passing, and comparing by reference
+3-3	03/03.js	      References themselves are passed by value
+3-4	03/04.js	      Are strings compared by value or by reference?
+
+8-1	08/01.js	      Defining JavaScript functions
+8-2	08/02.js	      Using functions as data
+8-3	08/03.js	      Object utility functions
+8-4	08/04.js	      Array utility functions
+8-5	08/05.js	      Utility functions for functions
+8-6	08/06.js	      Private properties with closures
+8-7	08/07.js	      Breakpoints using closures
+
+9-1	09/01.js	      A circle class
+9-2	09/02.js	      A complex number class
+9-3	09/03.js	      Subclassing a JavaScript class
+9-4	09/04.js	      Borrowing methods from one class for use
+			        by another
+9-5	09/05.js	      Mixin classes with generic methods for borrowing
+9-6	09/06.js	      Enhanced typeof testing
+9-7	09/07.js	      Testing whether an object borrows the
+			        methods of a class
+9-8	09/08.js	      Testing whether an object provides methods
+9-9	09/09.js	      Testing for array-like objects
+9-10	09/defineClass.js     A utility function for defining classes
+9-11	09/11.js	      Using the defineClass() method
+
+10-1	10/01.js	      Creating a namespace based on a domain name
+10-2	10/02.js	      A complex number class as a module
+10-3	10/03.js	      A module of shapes classes
+10-4	10/04.js	      Defining a private namespace with a closure
+10-5	10/Module.js	      A module of module-related utilities
+
+12-1	12/RunScript.java     A Java program for running JavaScript scripts
+12-2	12/Configuration.java A Java configuration file utility that
+			        interprets JavaScript expressions
+12-3	12/Keys.java	      Implementing a Java interface with JavaScript
+			        code. See also: listener.js
+
+14-1	14/01.js	      Extracting arguments from a URL
+14-2	14/Geometry.js	      Portably querying window geometry
+14-3	14/browser.js	      Determining browser vendor and version
+14-4	14/04.html	      Creating and manipulating windows
+14-5	14/05.js	      Using the confirm() method
+14-6	14/06.html	      A tasteful status line animation
+14-7	14/navigation.html    A navigation bar
+
+15-1	15/01.js	      Listing all anchors
+15-2	15/02.html	      Traversing the nodes of a document
+15-3	15/03.js	      Obtaining all text beneath a DOM node
+15-4	15/04.js	      Selecting HTML elements by class or tag name
+15-5	15/05.html	      Alphabetizing the elements of a list
+15-6	15/06.js	      Converting document content to uppercase
+15-7	15/07.html	      Reparenting a node to a <b> element
+15-8	15/08.js	      Using a DocumentFragment
+15-9	15/Log.js	      A logging facility for client-side JavaScript
+15-10	15/Make.js	      Element creation utility functions
+15-11	15/TOC.js	      Automatically generating a table of contents
+15-12	15/12.js	      Querying the currently selected text
+
+16-1	16/01.html	      Defining and using Cascading Style Sheets
+16-2	16/Shadows.js	      Creating shadowed text with unobtrusive
+			        JavaScript
+16-3	16/03.html	      Displaying windows with CSS
+16-4	16/Tooltip.js	      Tooltips with CSS
+16-5	16/05.html	      A simple color-changing animation
+16-6	16/AnimateCSS.js      A framework for CSS-based animations
+16-7	16/CSSClass.js	      Utility functions for manipulating className
+16-8	16/08.html	      Enabling and disabling stylesheets
+16-9	16/Stylesheet.js      Stylesheet utility methods
+
+17-1	17/01.js	      One function, many event handlers
+17-2	17/Handler.js	      An event compatibility layer for IE
+17-3	17/Tooltip2.js	      Tooltips positioned via mouse events
+17-4	17/Drag.js	      Dragging document elements
+17-5	17/InputFilter.js     Restricting user input to a set of characters
+17-6	17/Keymap.js	      A Keymap class for keyboard shortcuts
+17-7	17/runOnLoad.js	      Portable event registration for onload
+			        event handlers
+17-8	17/DataEvent.js	      Dispatching synthetic events
+
+18-1	18/01.html	      An HTML form containing all form elements
+18-2	18/02.html	      Adding form validation to your HTML forms
+18-3	18/Validate.js	      Automatic form validation with unobtrusive
+			        JavaScript
+
+19-1	19/01.html	      Using the Cookie class
+19-2	19/Cookie.js	      A Cookie utility class
+19-3	19/PObject.js	      PObject.js: persistent objects for JavaScript
+19-4	19/PObject.as	      ActionScript code for Flash-based persistence
+			        See also: PObject.swf
+
+20-1    20/01.js	      The HTTP.newRequest() utility
+20-2	20/02.js	      The HTTP.getText() utility
+20-3	20/03.js	      The HTTP.getXML() utility
+20-4	20/04.js	      The HTTP.getHeaders() utility
+20-5	20/05.js	      The HTTP.post() utility
+20-6	20/06.js	      HTTP._getResponse()
+20-7	20/07.js	      The HTTP.get() utility
+20-8	20/linkdetails.js     Ajax Tooltips
+20-9	20/jsquoter.php	      jsquoter.php
+20-10	20/10.js	      The HTTP.getTextWithScript() utility
+
+21-1	21/01.js	      Creating an empty XML document
+21-2	21/02.js	      Loading an XML document synchronously
+21-3	21/03.js	      Loading an XML document asynchronously
+21-4	21/04.js	      Parsing an XML document
+21-5	21/05.js	      Getting an XML document from a data island
+21-6	21/data.xml	      An XML data file
+21-7	21/07.js	      Building an HTML table from XML data
+21-8	21/08.xml	      A simple XSL stylesheet
+21-9	21/09.js	      XSLT in Mozilla and Internet Explorer
+21-10	21/10.js	      Evaluating XPath Expressions
+21-11	21/11.js	      Serializing XML
+21-12	21/12.html	      An XML data island and HTML template
+21-13	21/13.js	      Expanding HTML templates
+21-14	21/14.js	      Querying a web service with SOAP
+
+22-1	22/01.js	      Adding a rollover effect to an image
+22-2	22/02.js	      Adding rollover effects unobtrusively
+22-3	22/03.js	      Initializing rollovers with XHTML and namespaces
+22-4	22/ImageLoop.js	      Image animations
+22-5	22/BarChart.js	      Drawing bar charts with CSS
+22-6	22/CSSDrawing.js      The CSSDrawing class
+22-7	22/07.html	      Drawing a figure with the CSSDrawing class
+22-8	22/08.js	      Drawing a pie chart with JavaScript and SVG
+22-9	22/SVG.js	      SVG utility code
+22-10	22/10.html	      Drawing a pie chart with JavaScript and VML
+22-11	22/11.html	      Drawing a pie chart in an <canvas> tag
+22-12	22/Canvas.as	      Canvas.as
+			        See also: Canvas.swf
+22-13	22/13.html	      Drawing a pie chart with JavaScript and Flash
+22-14	22/Canvas.java	      A Java canvas applet for client-side drawing
+			        See also: Canvas.class
+22-15	22/15.html	      Drawing a pie chart with JavaScript and Java
+22-16	22/16.html	      Creating a sparkline image with Javascript
+			        and Java
+
+23-1	23/GetTextApplet.java An applet suitable for scripting
+			        See also: GetTextApplet.class
+23-2	23/02.html	      Scripting the Java Plug-in
+23-3	23/DOMApplet.java     An applet using the Common DOM API
+			        See also: DOMApplet.class, DOMApplet$1.class
+23-4  23/Box1.as	      ActionScript code that works with JavaScript
+			        See also: Box1.swf
+23-5	23/Box1.html	      Scripting a Flash movie
+23-6	23/Box2.as	      ActionScript using ExternalInterface
+			        See also: Box2.swf
+23-7	23/Box2.html	      Simplified Flash scripting with ExternalInterface

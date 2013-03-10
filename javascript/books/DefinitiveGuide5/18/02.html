@@ -1,0 +1,25 @@
+<script src="Validate.js"></script> <!-- include form validation module -->
+<style>
+/* 
+ * Validate.js requires us to define styles for the "invalid" class to give
+ * invalid fields a distinct visual appearance that the user will recognize.
+ * We can optionally define styles for valid fields as well.
+ */
+input.invalid { background: #faa; } /* Reddish background for invalid fields */
+input.valid { background: #afa; }   /* Greenish background for valid fields */
+</style>
+
+<!-- 
+  Now to get form fields validated, simply set required or pattern attributes.
+-->
+<form>
+  <!-- A value (anything other than whitespace) is required in this field -->
+  Name: <input type="text" name="name" required><br>
+  <!-- \s* means optional space. \w+ means one or more alphanumeric chars-->
+  email: <input type="text" name="email" pattern="^\s*\w+@\w+\.\w+\s*$"><br>
+  <!-- \d{5} means exactly five digits -->
+  zipcode: <input type="text" name="zip" pattern="^\s*\d{5}\s*$"><br>
+  <!-- no validation on this field -->
+  unvalidated: <input type="text"><br> 
+  <input type="submit">
+</form>

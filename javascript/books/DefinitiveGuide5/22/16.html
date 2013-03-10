@@ -1,0 +1,127 @@
+<head>
+<script>
+/**
+ * data is an array of numbers to be plotted as a time-series
+ * dx is the number of x pixels between data points
+ * config is an object that holds values that are likely to
+ * be the same for multiple invocations:
+ *   height: the height, in pixels of the generated image
+ *   ymin, ymax: the range, or Y axis bounds in user-space
+ *   backgroundColor: the background color as a numeric HTML color.
+ *   lineWidth: the width of the line to draw
+ *   lineColor: the color of the line to draw as an HTML # color spec
+ *   dotColor: if specified, a dot of this color will be placed on 
+ *             the last data point
+ *   bandColor: If specified, a band of this color will be drawn between
+ *      the bandMin and bandMax values to represent a "normal" range of
+ *      data values, and emphasize the values that exceed that range
+ */
+function makeSparkline(data, dx, config) {
+    var width = data.length * dx + 1; // overall image width
+    var yscale = config.height/(config.ymax - config.ymin); // For scaling data
+
+    // Convert data point number to a pixel value
+    function x(i) { return i * dx; }
+    // Convert a Y coordinate from user space to pixel space
+    function y(y) { return config.height - (y - config.ymin)*yscale; }
+    // Convert an HTML color spec to a java.awt.Color object
+    function color(c) {
+        c = c.substring(1);  // Remove leading # 
+        if (c.length == (3)) {  // convert to 6-char rep, if needed
+            c = c.charAt(0) + c.charAt(0) + c.charAt(1) + c.charAt(1) +
+                c.charAt(2) + c.charAt(2);
+        }
+        var red = parseInt(c.substring(0,2), 16);
+        var green = parseInt(c.substring(2,4), 16);
+        var blue  = parseInt(c.substring(4,6), 16);
+        return new java.awt.Color(red/255, green/255, blue/255);
+    }
+
+    // Create an offscreen image for the sparkline
+    var image = new java.awt.image.BufferedImage(width, config.height,
+                                    java.awt.image.BufferedImage.TYPE_INT_RGB);
+
+    // Get a Graphics object that lets us draw into that image
+    var g = image.createGraphics();
+
+    // Antialias everything. Tradeoff: makes the line smoother but fuzzier
+    g.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+                       java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+    // Fill the image with the background color
+    g.setPaint(color(config.backgroundColor));
+    g.fillRect(0, 0, width, config.height);
+
+    // If a bandColor was specified, draw the band
+    if (config.bandColor) {
+        g.setPaint(color(config.bandColor));
+        g.fillRect(0, y(config.bandMax),
+                   width, y(config.bandMin)-y(config.bandMax));
+    }
+
+
+    // Now build the line 
+    var line = new java.awt.geom.GeneralPath();
+    line.moveTo(x(0), y(data[0]));
+    for(var i = 1; i < data.length; i++) line.lineTo(x(i), y(data[i]));
+
+    // Set the line color and width, then draw the line
+    g.setPaint(color(config.lineColor));                     // Set line color
+    g.setStroke(new java.awt.BasicStroke(config.lineWidth)); // Set width
+    g.draw(line);                                            // Draw!
+
+    // If the dotColor was set, draw the dot
+    if (config.dotColor) {
+        g.setPaint(color(config.dotColor));
+        var dot=new java.awt.geom.Ellipse2D$Double(x(data.length-1)-.75,
+                                                   y(data[data.length-1])-.75,
+                                                   1.5, 1.5)
+        g.draw(dot);
+    }
+
+    // Write the image out as a byte array in PNG format
+    var stream = new java.io.ByteArrayOutputStream();
+    Packages.javax.imageio.ImageIO.write(image, "png", stream);
+    var imageData = stream.toByteArray();
+
+    // Convert the data to a URL-encoded string
+    var rawString = new java.lang.String(imageData, "iso8859-1");
+    var encodedString = java.net.URLEncoder.encode(rawString, "iso8859-1");
+    encodedString = encodedString.replaceAll("\\+", "%20");
+
+    // And return it all as a data: URL
+    return "data:image/png," + encodedString;
+}
+
+// Here is an example that uses the makeSparkline() function
+window.onload = function() {
+    // Create the img tag for the sparkline
+    var img = document.createElement("img");
+    img.align = "center";
+    img.hspace = 1;
+
+    // Set its src attribute to the data: URL of the sparkline
+    img.src = makeSparkline([3, 4, 5, 6, 7, 8, 8, 9, 10, 10, 12,
+                             16, 11, 10, 11, 10, 10, 10, 11, 12, 
+                             16, 11, 10, 11, 10, 10, 10, 11, 12, 
+                             14, 16, 18, 18, 19, 18, 17, 17, 16,
+                             14, 16, 18, 18, 19, 18, 17, 17, 16],
+                            2, { height: 20, ymin: 0, ymax: 20,
+                                 backgroundColor: "#fff",
+                                 lineWidth: 1, lineColor: "#000",
+                                 dotColor: "#f00", bandColor: "#ddd",
+                                 bandMin: 6, bandMax: 14
+                            });
+
+
+    // Find the placeholder element for the sparkline
+    var placeholder = document.getElementById("placeholder");
+
+    // And replace it with the image.
+    placeholder.parentNode.replaceChild(img, placeholder);
+}
+</script>
+</head>
+<body>
+Server load: <span id="placeholder"></span><span style="color:#f00">16</span>
+</body>

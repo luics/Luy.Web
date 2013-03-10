@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Media Query</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <style type="text/css">
+    body {
+      margin: 0;
+      color: #333;
+    }
+
+    #console {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #a00;
+    }
+
+    #width:after {
+      content: '<320';
+    }
+
+    @media (min-width: 321px) {
+      #width:after {
+        content: '>320';
+      }
+    }
+
+    @media (min-width: 481px) {
+      #width:after {
+        content: '>480';
+      }
+    }
+
+    #dir:after {
+      content: 'portrait';
+    }
+
+    @media (orientation: landscape) {
+      #dir:after {
+        content: 'landscape';
+      }
+    }
+
+    #hand:after {
+      content: 'pc';
+    }
+
+    @media handheld {
+      #hand:after {
+        content: 'handheld';
+      }
+    }
+  </style>
+</head>
+<body>
+<h1 id="width"></h1>
+
+<h1 id="dir"></h1>
+
+<h1 id="hand"></h1>
+
+<div id="console"></div>
+<script type="text/javascript">
+  function resize() {
+    document.getElementById('console').innerHTML = window.innerWidth + ' * ' + window.innerHeight;
+  }
+  resize();
+
+  window.onresize = resize;
+  window.addEventListener("deviceorientation", resize, false);
+</script>
+</body>
+</html>

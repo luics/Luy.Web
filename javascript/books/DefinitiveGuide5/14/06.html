@@ -1,0 +1,14 @@
+<script>
+var WastedTime = {
+    start: new Date(),   // Remember the time we started
+    displayElapsedTime: function() {
+        var now = new Date();  // What time is it now
+        // compute elapsed minutes
+        var elapsed = Math.round((now - WastedTime.start)/60000); 
+        // And try to display this in the status bar
+        window.defaultStatus = "You have wasted " + elapsed + " minutes.";
+    }
+}
+// Update the status line every minute
+setInterval(WastedTime.displayElapsedTime, 60000);
+</script>

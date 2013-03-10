@@ -1,0 +1,100 @@
+<!--
+  This is a Flash movie, embedded in our web page.
+  Following standard practice, we use <object id=""> for IE and
+  <embed name=""> for other browsers.  
+  Note the IE-specific conditional comments.
+-->
+<!--[if IE]>
+<object id="movie" type="application/x-shockwave-flash"
+        width="300" height="300">
+  <param name="movie" value="Box1.swf">
+</object>
+<![endif]--><!--[if !IE]> <--> 
+<embed name="movie" type="application/x-shockwave-flash"
+       src="Box1.swf" width="300" height="300">
+</embed>
+<!--> <![endif]-->
+
+<!-- 
+  This HTML form has buttons that script the movie or the player.
+  Note that the Draw button starts off disabled.  The Flash movie
+  sends a command to JavaScript when it is loaded, and JavaScript
+  then enables the button.
+-->
+<form name="f" onsubmit="return false;">
+<button name="button" onclick="draw()" disabled>Draw</button>
+<button onclick="zoom()">Zoom</button>
+<button onclick="pan()">Pan</button>
+</form>
+
+<script>
+// This function demonstrates how to call Flash the hard way.
+function draw() {
+    // First we get the Flash object.  Since we used "movie" as the id
+    // and name of the <object> and <embed> tags, the object is
+    // in a property named "movie".  In IE, it is a window property
+    // and in other browsers, it is a document property.
+    var flash = window.movie || document.movie; // Get Flash object.
+
+    // Make sure the movie is fully loaded before we try to script it.
+    // This is for demonstration only: it is redundant since we disable
+    // the button that invokes this method until Flash tells us it is loaded
+    if (flash.PercentLoaded() != 100) return;
+
+    // Next we "pass" the function arguments by setting them, one at a time.
+    flash.SetVariable("arg1", 10);
+    flash.SetVariable("arg2", 10);
+    flash.SetVariable("arg3", 50);
+    flash.SetVariable("arg4", 50);
+
+    // Now we trigger the function by setting one more property.
+    flash.SetVariable("drawBox", 1);
+
+    // Finally, we ask for the function's return value.
+    return flash.GetVariable("result");
+}
+
+function zoom() {
+    var flash = window.movie || document.movie; // Get Flash object.
+    flash.Zoom(50);
+}
+
+function pan() {
+    var flash = window.movie || document.movie; // Get Flash object.
+    flash.Pan(-50, -50, 1);
+}
+
+// This is the function that is called when Flash calls fscommand().
+// The two arguments are strings supplied by Flash.
+// This function must have this exact name, or it will not be invoked.
+// The function name begins with "movie" because that is the id/name of
+// the <object> and <embed> tags used earlier.
+function movie_DoFSCommand(command, args) {
+    if (command=="loaded") {
+        // When Flash tells us it is loaded, we can enable the form button.
+        document.f.button.disabled = false;
+    }
+    else if (command == "mousedown") {
+        // Flash tells us when the user clicks the mouse.
+        // Flash can only send us strings.  We've got to parse them
+        // as necessary to get the data that Flash is sending us.
+        var coords = args.split(",");
+        alert("Mousedown: (" + coords[0] + ", " + coords[1] + ")");
+    }
+    // These are some other useful commands
+    else if (command == "debug") alert("Flash debug: " + args);
+    else if (command == "eval") eval(args);
+}
+</script>
+
+<script language="VBScript">
+' This script is not written in JavaScript, but Microsoft's 
+' Visual Basic Scripting Edition.  This script is required for Internet
+' Explorer to receive fscommand() notifications from Flash. It will be 
+' ignored by all other browsers since they do not support VBScript.
+' The name of this VBScript subroutine must be exactly as shown.
+sub movie_FSCommand(byval command, byval args)
+
+  call movie_DoFSCommand(command, args) ' Just call the JavaScript version
+end sub
+</script>

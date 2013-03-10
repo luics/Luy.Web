@@ -1,0 +1,15 @@
+<script>
+// Define a shortcut to the javax.* package hierarchy
+var javax = Packages.javax;
+
+// Create some Java objects
+var frame = new javax.swing.JFrame("Hello World");
+var button = new javax.swing.JButton("Hello World");
+var font = new java.awt.Font("SansSerif", java.awt.Font.BOLD, 24);
+
+// Invoke methods on the new objects
+frame.add(button);
+button.setFont(font);
+frame.setSize(300, 200);
+frame.setVisible(true);
+</script>

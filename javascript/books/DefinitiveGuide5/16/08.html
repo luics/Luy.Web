@@ -1,0 +1,34 @@
+<head>
+<!-- Here we define four stylesheets, using <link> and <style> tags. -->
+<!-- Two of the <link>'ed sheets are alternate and so disabled by default. -->
+<!-- All have id attributes so we can refer to them by name. -->
+<link rel="stylesheet" type="text/css" href="ss0.css" id="ss0">
+<link rel="alternate stylesheet" type="text/css" href="ss1.css" 
+      id="ss1" title="Large Type">
+<link rel="alternate stylesheet" type="text/css" href="ss2.css"
+      id="ss2" title="High Contrast">
+<style id="ss3" title="Sans Serif">
+body { font-family: sans-serif; }
+</style>
+
+<script>
+// This function enables or disables a stylesheet specified by id.
+// It works for <link> and <style> elements.
+function enableSS(sheetid, enabled) {
+    document.getElementById(sheetid).disabled = !enabled;
+}
+</script>
+</head>
+<body>
+
+<!-- This is a simple HTML form for enabling and disabling stylesheets -->
+<!-- It is hardcoded to match the sheets in this document but could be -->
+<!-- dynamically generated using stylesheet titles instead. -->
+<form>
+<input type="checkbox" onclick="enableSS('ss0', this.checked)" checked>Basics
+<br><input type="checkbox" onclick="enableSS('ss1', this.checked)">Large Type
+<br><input type="checkbox" onclick="enableSS('ss2', this.checked)">Contrast
+<br><input type="checkbox" onclick="enableSS('ss3', this.checked)" checked>
+Sans Serif
+</form>
+</body>
