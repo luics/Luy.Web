@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+<body>
+	<ul id="myul"></ul>
+	<script>
+		var ul = document.getElementById('myul');
+		for (var i = 0; i < 20000; ++i) {
+			var li = document.createElement('li');
+			li.innerHTML = 'ÂýËÀÄã' + i;
+			ul.appendChild(li);
+		}
+	</script>
+</body>
+</html>

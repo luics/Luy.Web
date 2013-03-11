@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+	var Timer = {
+		_data: {},
+		start: function(key) {
+			Timer._data[key] = new Date();
+		},
+		stop: function(key) {
+			var time = Timer._data[key];
+			if (time) Timer._data[key] = new Date() - time;
+		},
+		getTime: function(key) {
+			return Timer._data[key];
+		}
+	};
+	
+	function processArray(items, process, callback)	{
+		var todo = items.concat();
+		setTimeout(function() {
+			var start = +new Date();
+			do {
+				process(todo.shift());
+			}
+			while (todo.length > 0 && (+new Date() - start < 50));
+			if (todo.length > 0) setTimeout(arguments.callee, 25);
+			else callback(items);
+		}, 25);
+	}
+	var items = [];
+	for (var i = 0; i < 1000; ++i) items.push(i);
+	
+	function outputValue(value) {
+		console.log(value);
+	}
+	Timer.start('processArray');
+	processArray(items, outputValue, function() {
+		Timer.stop('processArray');
+		alert('processArray, ' + Timer.getTime('processArray'));
+	});
+			
+	function multiStep(steps, args, callback) {
+		var tasks = steps.concat();
+		setTimeout(function() {
+			var start = +new Date();
+			do {
+				var task = tasks.shift();
+				task.apply(null, args || []);
+			}
+			while (tasks.length > 0 && (+new Date() - start < 50));
+			if (tasks.length > 0) setTimeout(arguments.callee, 25);
+			else callback(items);
+		}, 25);
+	}
+	function aa(id) { console.log('aa', id); }
+	function bb(id) { console.log('bb', id); }
+	function cc(id) { console.log('cc', id); }
+	function myDo(id) {
+		var tasks = [], cand = [aa, bb, cc];
+		for (var i = 0; i < 300; ++i) tasks.push(cand[i % 3]);
+		multiStep(tasks, [id], function() {
+			Timer.stop('multiStep');
+			alert('multiStep, ' + Timer.getTime('multiStep'));
+		});
+	}
+	Timer.start('multiStep');
+	myDo(1);
+</script>
+</head>
+<body>
+</body>
+</html>

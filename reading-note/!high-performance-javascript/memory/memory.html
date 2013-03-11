@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<script>
+var fibonacci = function() {
+	var memo = [0, 1];
+	var fib = function(n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fib(n - 1) + fib(n - 2);
+			memo[n] = result;
+		}
+		return result;
+	};
+	return fib;
+}();
+document.write(fibonacci(10) + "<br>");
+
+var memoizer = function(memo, fundamental) {
+	var shell = function(n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundamental(shell, n);
+			memo[n] = result;
+		}
+		return result;
+	};
+	return shell;
+};
+var fibo = memoizer([0, 1], function(shell, n) {
+	return shell(n - 1) + shell(n - 2);
+});
+var factor = memoizer([1, 1], function(shell, n) {
+	return n * shell(n - 1);
+});
+document.write(fibo(9) + "<br>");
+document.write(factor(5) + "<br>");
+</script>
+</body>
+</html>

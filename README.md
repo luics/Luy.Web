@@ -24,7 +24,7 @@ Some special directories:
 * `compatibility` [Article, Writing] "前端兼容性不完全指南"
 * `protocol` [Article, Writing] "前端协议不完全指南"
 * `app-cache` [Research] offline solution: Appcache + HTTP Cache
-* `book` reading notes with demo or UT
+* `reading-note` book or article reading notes with demo or UT
 * `html5` html5 demos, more: [simpl.info](http://simpl.info) | [html5demos](http://html5demos.com/)
 * `luyutil` [Project, Obselete] luics's js library
 * `buglite` [Project, Obselete] luics's firebug lite version

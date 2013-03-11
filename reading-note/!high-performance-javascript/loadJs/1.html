@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>Script Defer Example</title>
+</head>
+<body>
+<script defer>
+	alert('defer');
+</script>
+<script>
+	alert('script');
+</script>
+<script>
+	window.onload = function() {
+		alert('load');
+	};
+</script>
+</body>
+</html>

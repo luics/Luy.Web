@@ -1,0 +1,17 @@
+<html>
+<head>
+</head>
+<body>
+	<ul id="myul"></ul>
+	<script>
+		var ul = document.getElementById('myul');
+		var frag = document.createDocumentFragment();
+		for (var i = 0; i < 20000; ++i) {
+			var li = document.createElement('li');
+			li.innerHTML = 'ÂýËÀÄã' + i;
+			frag.appendChild(li);
+		}
+		ul.appendChild(frag);
+	</script>
+</body>
+</html>
