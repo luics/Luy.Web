@@ -1,0 +1,1 @@
+({appDir:"../",baseUrl:"scripts/",dir:"../../webapp-build",paths:{jquery:"empty:"},modules:[{name:"main"}]});

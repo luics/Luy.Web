@@ -1,0 +1,39 @@
+body {
+    font-size: 12px;
+    color: #333;
+}
+
+.content {
+    width: 400px;
+    min-width: 400px;
+    height: 200px;
+    overflow-x: visible;
+    overflow-y: auto;
+    line-height: 14px;
+    color: #666;
+}
+
+.btn {
+    width: 50px;
+    height: 28px;
+    margin-bottom: 3px;
+}
+
+.record {
+    width: 160px;
+    height: 25px;
+    margin-bottom: 3px;
+}
+
+/*.stack-item {*/
+    /*color: #555;*/
+    /*margin: 2px 1px;*/
+    /*padding: 2px;*/
+    /*border: 1px solid #ddd;*/
+    /*-webkit-border-radius: 5px;*/
+    /*border-radius: 5px;*/
+/*}*/
+
+.stack-item:hover {
+    background-color: #fafad2;
+}
