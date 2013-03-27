@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+<div id="id">okokokokokok</div>
+<button id="anim">animate</button>
+<script type="text/javascript" src="qatrix.js"></script>
+<script type="text/javascript">
+
+  $('anim').onclick = function() {
+//    $animate($('id'), {
+//      'width': {
+//        from: 300,
+//        to: 10
+//      },
+//      'opacity': {
+//        from: 1,
+//        to: 0.5
+//      }
+//    });
+
+    console.log(+new Date);
+    $fadein($('id'), 1000, function() {
+      console.log(+new Date, 'completed');
+    });
+  };
+</script>
+</body>
+</html>

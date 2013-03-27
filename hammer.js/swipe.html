@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width;initial-scale=1;user-scalable=no;"/>
+  <style type="text/css">
+    .block {
+      float: left;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #999;
+      margin-right: 5px;
+    }
+
+    .log {
+      clear: left;
+    }
+  </style>
+</head>
+<body>
+<div class="block" id="swipe">swipe</div>
+
+<div class="log" id="log"></div>
+<script type="text/javascript" src="hammer.js"></script>
+<script type="text/javascript">
+  function $(id) {
+    return  document.getElementById(id);
+  }
+  function log(msg) {
+    $('log').innerHTML = (+new Date) + msg + '<br>' + $('log').innerHTML;
+  }
+
+  Hammer($('swipe')).on("swipe", function(event) {
+    log('swipe' + event);
+  });
+</script>
+</body>
+</html>

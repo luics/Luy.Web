@@ -18,13 +18,13 @@ by [**Luics**](http://luics.github.com/), since 2012-04-28
 
 Some special directories:
 
+* `reading-note` book or article reading notes with demo or UT
 * `markdown` [Project, Released] node module [markdown-util](https://npmjs.org/package/markdown-util)
 * `node` [Project, Released] node module [connect-header](https://npmjs.org/package/connect-header), a node-connect middleware
 * `chrome-ext-clipboard` [Project, Devlopping] a chrome extension
 * `compatibility` [Article, Writing] "前端兼容性不完全指南"
 * `protocol` [Article, Writing] "前端协议不完全指南"
 * `app-cache` [Research] offline solution: Appcache + HTTP Cache
-* `reading-note` book or article reading notes with demo or UT
 * `html5` html5 demos, more: [simpl.info](http://simpl.info) | [html5demos](http://html5demos.com/)
 * `luyutil` [Project, Obselete] luics's js library
 * `buglite` [Project, Obselete] luics's firebug lite version
