@@ -3,8 +3,17 @@ module('test.type.js');
 test('Undefined', function() {
     var pri;
     var pri1;
+    var obj = {};
+    
+    ok(typeof undefined === 'undefined');
+    ok(obj.a === undefined);
     equal('undefined', typeof pri);
-    equal(true, pri === pri1);
+    ok(pri === pri1);
+
+    //overwrite
+    undefined = 1; // valid
+    //ok(obj.a !== undefined); // chrome无法通过, ie6 ok
+    ok(typeof obj.a === 'undefined');
 });
 
 test('Null', function() {
@@ -15,6 +24,9 @@ test('Null', function() {
     ok(pri === pri1);
     ok(pri == und);
     equal(false, pri === und);
+    
+    //overwrite
+    // null = 1; // invalid
 });
 
 test('Boolean value & object', function() {

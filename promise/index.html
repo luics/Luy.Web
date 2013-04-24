@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+@see <a href="http://www.cnblogs.com/iamzhanglei/archive/2013/04/14/3019821.html">
+  http://www.cnblogs.com/iamzhanglei/archive/2013/04/14/3019821.html</a>
+
+<script type="text/javascript" src="promise-short.js"></script>
+<script type="text/javascript">
+  function f1() {
+    var promise = new Promise();
+    setTimeout(function () {
+
+      console.log(1);
+      promise.resolve();
+    }, 1500);
+
+    return promise;
+  }
+
+  function f2() {
+    var promise = new Promise();
+    setTimeout(function () {
+
+      console.log(2);
+      promise.resolve();
+    }, 2500);
+
+    return promise;
+  }
+  
+  console.log(f1().then(function(){
+    console.log('f1 then');
+  }));
+</script>
+</body>
+</html>
