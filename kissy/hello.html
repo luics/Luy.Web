@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+<script src="http://docs.kissyui.com/assets/import-kissy.js"></script>
+<div class="demo">
+  <style>
+    .demo-wrap {
+      position: relative;
+      margin-top: 20px;
+      height: 110px;
+    }
+
+    #demo-txt {
+      position: absolute;
+      left: 400px;
+      top: 0;
+      color: #333333;
+      font: normal 26px/2 Futura, "Century Gothic", AppleGothic, sans-serif;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+
+    #demo-img {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+
+  <button type="button" id="demo-btn" autocomplete="off">Click Me!</button>
+  <div class="demo-wrap">
+    <img id="demo-img" src="http://docs.kissyui.com/logo/logo.png"/>
+
+    <h2 id="demo-txt">Hello KISSY, NOT KITTY!</h2>
+  </div>
+  <script>
+    KISSY.use('dom,event,anim', function(S, DOM, Event, Anim) {
+      var btn = DOM.get('#demo-btn');
+
+      Event.on(btn, 'click', function() {
+        DOM.attr(btn, 'disabled', true);
+
+        new Anim('#demo-img', 'left: 400px; opacity: 0', 2, 'easeOut', function() {
+          new Anim('#demo-txt',
+              'left: 0; opacity: 1; fontSize: 28px',
+              2, 'bounceOut').run();
+        }).run();
+      });
+    });
+  </script>
+</div>
+</body>
+</html>

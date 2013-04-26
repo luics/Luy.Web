@@ -1,0 +1,210 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    /*background: #eee;*/
+}
+
+.main {
+    margin: 0 auto;
+    width: 1080px;
+    background: url(../img/bg.png) no-repeat 0 0;
+}
+
+.header {
+    margin: 0 20px;
+    height: 234px;
+}
+
+.nav {
+    padding: 6px 20px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background: #333;
+}
+
+.body {
+    position: relative;
+    margin: 0 auto;
+    width: 900px;
+    /*min-height: 500px;*/
+}
+
+.loading{
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fafad2;
+    color: #666;
+    padding: 3px;
+}
+
+.note {
+    padding: 15px;
+}
+
+.op {
+    margin-bottom: 5px;
+}
+
+.footer {
+    margin: 20px;
+}
+
+.wz {
+    min-height: 300px;
+}
+
+.title {
+    font-size: 150%;
+}
+
+.title  a {
+    font-size: 60%;
+}
+
+.addr {
+    margin: 10px 20px;
+}
+
+.addr ul {
+    list-style: none;
+}
+
+.submit {
+    width: 60px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.admin{
+    display: none;
+}
+
+
+/*
+* 表格样式来自simple little table, ie678平滑降级(悬浮加亮等)
+* @see http://johnsardine.com/freebies/dl-html-css/simple-little-tab/
+*/
+table a:link {
+    color: #666;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+table a:visited {
+    color: #999999;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+table a:active,
+table a:hover {
+    color: #bd5a35;
+    text-decoration: none;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #666;
+    font-size: 12px;
+    text-shadow: 1px 1px 0px #fff;
+    background: #eaebec;
+    border: #ccc 1px solid;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+
+    -moz-box-shadow: 0 1px 2px #d1d1d1;
+    -webkit-box-shadow: 0 1px 2px #d1d1d1;
+    box-shadow: 0 1px 2px #d1d1d1;
+
+    width: 100%;
+    /*min-height: 300px;*/
+}
+
+table th {
+    /*padding: 21px 25px 22px 25px;*/
+    padding: 8px 12px;
+    border-top: 1px solid #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+    width: 8%;
+
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+    background: -moz-linear-gradient(top, #ededed, #ebebeb);
+}
+
+table th:first-child {
+    text-align: left;
+    padding-left: 20px;
+}
+
+table tr:first-child th:first-child {
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+table tr:first-child th:last-child {
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+table tr {
+    text-align: center;
+    /*padding-left: 20px;*/
+    padding-left: 5px;
+}
+
+table td:first-child {
+    text-align: left;
+    /*padding-left: 20px;*/
+    padding-left: 5px;
+    border-left: 0;
+}
+
+table td {
+    /*padding: 18px;*/
+    padding: 4px;
+    text-align: right;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+
+    background: #fafafa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+    background: -moz-linear-gradient(top, #fbfbfb, #fafafa);
+}
+
+table tr.even td {
+    background: #f6f6f6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+    background: -moz-linear-gradient(top, #f8f8f8, #f6f6f6);
+}
+
+table tr:last-child td {
+    border-bottom: 0;
+}
+
+table tr:last-child td:first-child {
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+table tr:last-child td:last-child {
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+table tr:hover td {
+    background: #f2f2f2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+    background: -moz-linear-gradient(top, #f2f2f2, #f0f0f0);
+}
