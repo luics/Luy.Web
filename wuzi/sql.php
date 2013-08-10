@@ -2,16 +2,16 @@
 
 class Db
 {
-     // const DB_HOST = 'localhost:3306';
-     // const DB_USER  = 'root';
-     // const DB_PWD = '123456';
-     // const DB_NAME = 'wuzi';
-
      const DB_HOST = 'localhost:3306';
+     const DB_USER  = 'root';
+     const DB_PWD = 'root';
+     const DB_NAME = 'wuzi';
+
+     /* const DB_HOST = 'localhost:3306';
      const DB_USER  = 'root';
      const DB_PWD = 'YOUxiu9(';
      const DB_NAME = 'site_wuzihuzhu';
-    /* ['dbhost'] = 'localhost';
+     ['dbhost'] = 'localhost';
 ['dbuser'] = 'root';
 ['dbpw'] = '';
 ['dbcharset'] = 'utf8';*/
